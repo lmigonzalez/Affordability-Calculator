@@ -1,4 +1,5 @@
 //Getting values from doom
+import {test} from './helper.js'
 
 // inputs and checkbox
 const annualIncomeInput = document.getElementById('annualIncome');
@@ -41,6 +42,8 @@ let hOADuesValue;
 let monthlyPaymentValue;
 
 // simple form
+
+console.log(test())
 
 annualIncomeInput.addEventListener('change', (e) => {
   annualIncomeValue = annualIncomeInput.value;

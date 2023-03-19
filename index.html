@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Affordability Calculator</h1>
+    <section>
+      <form>
+        <div>
+          <label for="annualIncome">Annual income</label>
+
+          <input id="annualIncome" type="text" name="annualIncome" value="75000">
+        </div>
+        <div>
+          <label for="monthlyDebts">Monthly debts</label>
+
+          <input id="monthlyDebts" type="text" value="250"/>
+        </div>
+
+        <div>
+          <label for="downPayment">Down payment</label>
+          <input id="downPayment" type="text" value="20000"/>
+        </div>
+
+		<button id="form-type" class="form-type">
+			Advanced 
+			<img src="/images/down-arrow.svg" alt=""/>
+		</button>
+        <div id="advancedForm" class="advancedFormContainer">
+          <div>
+            <label for="debtToIncome">Debt-to-income</label>
+
+            <input id="debtToIncome" type="text" value="36%"/>
+          </div>
+          <div>
+            <label for="interestRate">Interest rate</label>
+
+            <input id="interestRate" type="text" value="4.176%"/>
+          </div>
+
+          <div>
+            <label for="loanTerm">Loan term</label>
+            <input id="loanTerm" type="text" value="360 months"/>
+          </div>
+          <div class="checkbox-container">
+            <input id="taxesInclude" type="checkbox" name="vehicle1" value="true" />
+            <label for="vehicle1">Include taxes/ins</label><br />
+          </div>
+
+          <div>
+            <label for="propertyTax">Property tax</label>
+
+            <input id="propertyTax" type="text" value="1.2%"/>
+          </div>
+
+          <div>
+            <label for="homeInsurance">Home insurance</label>
+            <input id="homeInsurance" type="text" value="800 /year"/>
+          </div>
+
+          <div class="checkbox-container">
+            <input id="OMIinclude" type="checkbox" name="vehicle1" value="true" />
+            <label for="OMIinclude">Include PMI</label><br />
+          </div>
+
+          <div>
+            <label for="hOADues">HOA dues</label>
+            <input id="hOADues" type="text" value="$0 / month"/>
+          </div>
+        </div>
+      </form>
+      <div class="result-container">
+        <p>You can afford a house up to</p>
+        <strong id="result"></strong>
+
+        <input type="range" id="monthlyPayment" name="monthly payment"/>
+      </div>
+    </section>
+    <script src="app.js"></script>
+  </body>
+</html>

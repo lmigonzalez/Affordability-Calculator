@@ -1,5 +1,5 @@
 //Getting values from doom
-import {test} from './helper.js'
+import { test, convertValue } from './helper.js';
 
 // inputs and checkbox
 const annualIncomeInput = document.getElementById('annualIncome');
@@ -18,15 +18,17 @@ const monthlyPaymentInput = document.getElementById('monthlyPayment');
 
 monthlyPaymentInput.min = 0;
 monthlyPaymentInput.max =
-  parseFloat(annualIncomeInput.value / 12) * 0.43 -
-  parseFloat(monthlyDebtsInput.value);
-console.log(annualIncomeInput.value)
+  (convertValue(annualIncomeInput) / 12) * 0.43 -
+  convertValue(monthlyDebtsInput);
+
 monthlyPaymentInput.value =
-  (parseFloat(annualIncomeInput.value) / 12) * 0.36 -
-  parseFloat(monthlyDebtsInput.value);
+  (convertValue(annualIncomeInput) / 12) * 0.36 -
+  convertValue(monthlyDebtsInput);
 
 // btn
 const changeForm = document.getElementById('form-type');
+
+const advancedFormDiv = document.getElementById('advancedForm');
 
 // Inputs value
 let annualIncomeValue;
@@ -43,18 +45,18 @@ let monthlyPaymentValue;
 
 // simple form
 
-console.log(test())
+console.log(test());
 
 annualIncomeInput.addEventListener('change', (e) => {
   annualIncomeValue = annualIncomeInput.value;
   console.log(annualIncomeValue);
   monthlyPaymentInput.max =
-  parseFloat(annualIncomeInput.value / 12) * 0.43 -
-  parseFloat(monthlyDebtsInput.value);
-console.log(annualIncomeInput.value)
-monthlyPaymentInput.value =
-  (parseFloat(annualIncomeInput.value) / 12) * 0.36 -
-  parseFloat(monthlyDebtsInput.value);
+    parseFloat(annualIncomeInput.value / 12) * 0.43 -
+    parseFloat(monthlyDebtsInput.value);
+  console.log(annualIncomeInput.value);
+  monthlyPaymentInput.value =
+    (parseFloat(annualIncomeInput.value) / 12) * 0.36 -
+    parseFloat(monthlyDebtsInput.value);
 });
 
 monthlyDebtsInput.addEventListener('change', (e) => {
@@ -65,7 +67,6 @@ monthlyDebtsInput.addEventListener('change', (e) => {
 downPaymentInput.addEventListener('change', (e) => {
   downPaymentValue = downPaymentInput.value;
   console.log(downPaymentValue);
-  
 });
 
 // advanced form
@@ -107,13 +108,16 @@ hOADuesInput.addEventListener('change', (e) => {
 
 monthlyPaymentInput.addEventListener('change', (e) => {
   monthlyPaymentValue = monthlyPaymentInput.value;
-  const result = document.getElementById('result');
-  result.textContent = '$' + monthlyPaymentValue;
+
+  const monthlyPaymentResult = document.getElementById('monthlyPaymentResult');
+  monthlyPaymentResult.textContent = monthlyPaymentValue
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  console.log(monthlyPaymentValue);
 });
 
 changeForm.addEventListener('click', (e) => {
   e.preventDefault();
-  const advancedFormDiv = document.getElementById('advancedForm');
 
   advancedFormDiv.classList.toggle('showAdvanceForm');
 });

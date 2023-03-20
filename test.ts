@@ -31,8 +31,7 @@ function canAfford(totalPayment:number,taxPaymentForMounth:number,downPayment:nu
 canAfford(totalPayment(monthlyPayForHouse(annualIncome, monthlyDebts, homeInsurance / 12, hoaDues),
   amortizationConstant(interestRate, loanTermInMonths)),
   taxPaymentForMounth(totalPayment(monthlyPayForHouse(annualIncome, monthlyDebts, homeInsurance / 12, hoaDues),
-      amortizationConstant(interestRate, loanTermInMonths)), propertyTaxRate, downPayment),
-  
+      amortizationConstant(interestRate, loanTermInMonths)), propertyTaxRate, downPayment),  
   downPayment,loanTermInMonths);
 
 
@@ -75,4 +74,3 @@ function calculatAffordability() {
   console.log('Maximum affordable price:', maximumAffordablePrice.toFixed(2));
 }
 
-console.log(calculateAffordability());

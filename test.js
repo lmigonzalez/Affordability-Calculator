@@ -8,23 +8,23 @@
   const hoaDues = 0;
   const monthlyPayment = 1982;
   
-function monthlyPayForHouse(annualIncome: number, dti: number, ...monthlyDebs: number[]) {
+function monthlyPayForHouse(annualIncome, dti, ...monthlyDebs) {
     return (annualIncome / 12)*dti/100 - monthlyDebs.reduce((acc,curr)=>acc+curr);
 }
 
-function totalPayment(monthlyPayForHouse: number, amortizationConstant:number) {
+function totalPayment(monthlyPayForHouse, amortizationConstant) {
     return (amortizationConstant) * monthlyPayForHouse;
 }
 
-function amortizationConstant(interestRate:number,loanTermInMonths:number) {
+function amortizationConstant(interestRate,loanTermInMonths) {
     return (1 - Math.pow(1 + interestRate, loanTermInMonths)) / (interestRate/100);
 }
 
-function taxPaymentForMounth(totalPayment: number, propertyTaxRate: number, downPayment: number) {
+function taxPaymentForMounth(totalPayment, propertyTaxRate, downPayment) {
   return (totalPayment + downPayment) * (propertyTaxRate / 1200);
 }
 
-function canAfford(totalPayment:number,taxPaymentForMounth:number,downPayment:number,loanTermInMonths:number) {
+function canAfford(totalPayment,taxPaymentForMounth,downPayment,loanTermInMonths) {
   return totalPayment + downPayment - taxPaymentForMounth*loanTermInMonths ;
 }
 

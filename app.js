@@ -12,6 +12,7 @@ const OMIIncludeInput = document.getElementById('OMIinclude');
 const hOADuesInput = document.getElementById('hOADues');
 
 const monthlyPaymentInput = document.getElementById('monthlyPayment');
+const result = document.getElementById('result');
 
 const monthlyPaymentResult = document.getElementById('monthlyPaymentResult');
 const debtTOIncomeRatio = document.getElementById('debtTOIncomeRatio');
@@ -26,7 +27,7 @@ const calculateAffordability = () => {
   monthlyPaymentInput.min = 0;
   monthlyPaymentInput.max = parseInt(monthlyIncomeAfterExpense * 0.43);
   monthlyPaymentInput.value = monthlyIncomeAfterExpense * 0.36;
-  console.log(monthlyIncomeAfterExpense);
+  // console.log(monthlyIncomeAfterExpense);
   // console.log(monthlyIncomeAfterExpense * 0.36);
 
   monthlyPaymentInput.value =
@@ -38,6 +39,34 @@ const calculateAffordability = () => {
     .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
   debtTOIncomeRatio.textContent = debtToIncomeInput.value;
+  
+  const annualIncome = annualIncomeInput.value
+  const monthlyDebts = monthlyDebtsInput.value
+  const downPayment = downPaymentInput.value
+  const interestRate = interestRateInput.value
+  const loanTermInMonths = loanTermInput.value
+  const propertyTaxRate = propertyTaxInput.value
+  const homeInsurance = OMIIncludeInput.value
+  const hoaDues = hOADuesInput.value  
+  const dti = debtToIncomeInput.value;
+  
+  const monthlyIncome = annualIncome / 12;  
+
+  const monthlyMortagePlusTaxPayment = monthlyIncome * dti / 100 - monthlyDebts;
+  console.log(monthlyMortagePlusTaxPayment)
+  const monthlyInterestRate = interestRate / 1200;  
+  console.log(downPayment*propertyTaxRate/1200)
+  const propertyPrice =
+    ( monthlyMortagePlusTaxPayment / (        
+        ((monthlyInterestRate *
+          Math.pow(1 + monthlyInterestRate, loanTermInMonths)) /
+          (Math.pow(1 + monthlyInterestRate, loanTermInMonths) - 1) + propertyTaxRate/1200)))  
+  
+  
+  const finalPrice = propertyPrice + downPayment - (homeInsurance/12 + hoaDues)*loanTermInMonths ; 
+  
+  result.value = finalPrice;
+ 
 };
 
 function syncPercentWithBar() {

@@ -1,11 +1,8 @@
-//Getting values from doom
-import { test, convertValue } from './helper.js';
-
-// inputs and checkbox
+//simple
 const annualIncomeInput = document.getElementById('annualIncome');
 const monthlyDebtsInput = document.getElementById('monthlyDebts');
 const downPaymentInput = document.getElementById('downPayment');
-
+//advanced
 const debtToIncomeInput = document.getElementById('debtToIncome');
 const interestRateInput = document.getElementById('interestRate');
 const loanTermInput = document.getElementById('loanTerm');
@@ -16,108 +13,55 @@ const hOADuesInput = document.getElementById('hOADues');
 
 const monthlyPaymentInput = document.getElementById('monthlyPayment');
 
-monthlyPaymentInput.min = 0;
-monthlyPaymentInput.max =
-  (convertValue(annualIncomeInput) / 12) * 0.43 -
-  convertValue(monthlyDebtsInput);
+const monthlyPaymentResult = document.getElementById('monthlyPaymentResult');
+const debtTOIncomeRatio = document.getElementById('debtTOIncomeRatio');
 
-monthlyPaymentInput.value =
-  (convertValue(annualIncomeInput) / 12) * 0.36 -
-  convertValue(monthlyDebtsInput);
+const calculateAffordability = () => {
+  // monthly income after expenses
+  let monthlyIncomeAfterExpense = parseInt(
+    annualIncomeInput.value / 12 - monthlyDebtsInput.value
+  );
 
-// btn
-const changeForm = document.getElementById('form-type');
+  // slide bar min, max and value
+  monthlyPaymentInput.min = 0;
+  monthlyPaymentInput.max = parseInt(monthlyIncomeAfterExpense * 0.43);
+  monthlyPaymentInput.value = monthlyIncomeAfterExpense * 0.36;
+  console.log(monthlyIncomeAfterExpense);
+  // console.log(monthlyIncomeAfterExpense * 0.36);
 
-const advancedFormDiv = document.getElementById('advancedForm');
-
-// Inputs value
-let annualIncomeValue;
-let monthlyDebtsValue;
-let downPaymentValue;
-let debtToIncomeValue;
-let interestRateValue;
-let loanTermValue;
-let taxesIncludeValue;
-let propertyTaxValue;
-let OMIIncludeValue;
-let hOADuesValue;
-let monthlyPaymentValue;
-
-// simple form
-
-console.log(test());
-
-annualIncomeInput.addEventListener('change', (e) => {
-  annualIncomeValue = annualIncomeInput.value;
-  console.log(annualIncomeValue);
-  monthlyPaymentInput.max =
-    parseFloat(annualIncomeInput.value / 12) * 0.43 -
-    parseFloat(monthlyDebtsInput.value);
-  console.log(annualIncomeInput.value);
   monthlyPaymentInput.value =
-    (parseFloat(annualIncomeInput.value) / 12) * 0.36 -
-    parseFloat(monthlyDebtsInput.value);
-});
+    monthlyIncomeAfterExpense * (debtToIncomeInput.value / 100);
+  // console.log(monthlyPaymentInput.value);
 
-monthlyDebtsInput.addEventListener('change', (e) => {
-  monthlyDebtsValue = monthlyDebtsInput.value;
-  console.log(monthlyDebtsValue);
-});
-
-downPaymentInput.addEventListener('change', (e) => {
-  downPaymentValue = downPaymentInput.value;
-  console.log(downPaymentValue);
-});
-
-// advanced form
-
-debtToIncomeInput.addEventListener('change', (e) => {
-  debtToIncomeValue = debtToIncomeInput.value;
-  console.log(debtToIncomeValue);
-});
-
-interestRateInput.addEventListener('change', (e) => {
-  interestRateValue = interestRateInput.value;
-  console.log(interestRateValue);
-});
-
-loanTermInput.addEventListener('change', (e) => {
-  loanTermValue = loanTermInput.value;
-  console.log(loanTermValue);
-});
-
-taxesIncludeInput.addEventListener('change', (e) => {
-  taxesIncludeValue = e.target.checked ? true : false;
-  console.log(taxesIncludeValue);
-});
-
-propertyTaxInput.addEventListener('change', (e) => {
-  propertyTaxValue = propertyTaxInput.value;
-  console.log(propertyTaxValue);
-});
-
-OMIIncludeInput.addEventListener('change', (e) => {
-  OMIIncludeValue = e.target.checked ? true : false;
-  console.log(OMIIncludeValue);
-});
-
-hOADuesInput.addEventListener('change', (e) => {
-  hOADuesValue = hOADuesInput.value;
-  console.log(hOADuesValue);
-});
-
-monthlyPaymentInput.addEventListener('change', (e) => {
-  monthlyPaymentValue = monthlyPaymentInput.value;
-
-  const monthlyPaymentResult = document.getElementById('monthlyPaymentResult');
-  monthlyPaymentResult.textContent = monthlyPaymentValue
+  monthlyPaymentResult.textContent = monthlyPaymentInput.value
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  console.log(monthlyPaymentValue);
-});
 
-changeForm.addEventListener('click', (e) => {
-  e.preventDefault();
+  debtTOIncomeRatio.textContent = debtToIncomeInput.value;
+};
 
-  advancedFormDiv.classList.toggle('showAdvanceForm');
-});
+function syncPercentWithBar() {
+  let monthlyIncomeAfterExpense = parseInt(
+    annualIncomeInput.value / 12 - monthlyDebtsInput.value
+  );
+  monthlyPaymentInput.value = parseInt(
+    monthlyIncomeAfterExpense * (debtToIncomeInput.value / 100)
+  );
+  console.log(
+    parseInt(monthlyIncomeAfterExpense * (debtToIncomeInput.value / 100))
+  );
+}
+
+function syncBarWithPercent() {
+  let monthlyIncomeAfterExpense = parseInt(
+    annualIncomeInput.value / 12 - monthlyDebtsInput.value
+  );
+  debtToIncomeInput.value = parseInt(
+    (monthlyPaymentInput.value / monthlyIncomeAfterExpense) * 100
+  );
+}
+
+const toggleForm = () => {
+  console.log('hello');
+  document.getElementById('advancedForm').classList.toggle('showAdvanceForm');
+};

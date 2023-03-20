@@ -13,73 +13,132 @@
       <form>
         <div class="input-container money">
           <label for="annualIncome">Annual income</label>
-			<span>$</span>
-          <input id="annualIncome" type="text" name="annualIncome" value="75000" class="money-input">
+          <span>$</span>
+          <input
+            id="annualIncome"
+            type="text"
+            name="annualIncome"
+            value="70000"
+            class="money-input"
+            onchange="calculateAffordability()"
+          />
         </div>
 
         <div class="input-container money">
           <label for="monthlyDebts">Monthly debts</label>
-		  <span>$</span>
-          <input id="monthlyDebts" type="text" value="250"/>
+          <span>$</span>
+          <input
+            id="monthlyDebts"
+            type="text"
+            value="250"
+            onchange="calculateAffordability()"
+          />
         </div>
 
         <div class="input-container money">
           <label for="downPayment">Down payment</label>
-		  <span>$</span>
-          <input id="downPayment" type="text" value="20000"/>
+          <span>$</span>
+          <input
+            id="downPayment"
+            type="text"
+            value="20000"
+            onchange="calculateAffordability()"
+          />
         </div>
 
-		<button id="form-type" class="form-type">
-			Advanced 
-			<img src="/images/down-arrow.svg" alt=""/>
-		</button>
+        <button type="button" id="form-type" class="form-type" onclick="return toggleForm()">
+          Advanced
+          <img src="/images/down-arrow.svg" alt="" />
+        </button>
+		
         <div id="advancedForm" class="advancedFormContainer">
-
           <div class="input-container percent">
             <label for="debtToIncome">Debt-to-income</label>
-			<span>%</span>
-            <input id="debtToIncome" type="text" value="36"/>
+            <span>%</span>
+            <input
+              id="debtToIncome"
+              type="text"
+			  value="36"	
+              onchange="syncPercentWithBar()"
+            />
           </div>
 
           <div class="input-container percent">
             <label for="interestRate">Interest rate</label>
-			<span>%</span>
-            <input id="interestRate" type="text" value="4.176"/>
+            <span>%</span>
+            <input
+              id="interestRate"
+              type="text"
+              value="4.176"
+              onchange="calculateAffordability()"
+            />
           </div>
 
           <div class="input-container percent">
             <label for="loanTerm">Loan term</label>
-			<span>/months</span>
-            <input id="loanTerm" type="text" value="360"/>
+            <span>/months</span>
+            <input
+              id="loanTerm"
+              type="text"
+              value="360"
+              onchange="calculateAffordability()"
+            />
           </div>
           <div class="checkbox-container">
-            <input id="taxesInclude" type="checkbox" name="vehicle1" value="true" />
-			<span>%</span>
+            <input
+              id="taxesInclude"
+              type="checkbox"
+              name="vehicle1"
+              value="true"
+              onchange="calculateAffordability()"
+            />
+
             <label for="vehicle1">Include taxes/ins</label><br />
           </div>
 
           <div class="input-container percent">
             <label for="propertyTax">Property tax</label>
-			<span>%</span>
-            <input id="propertyTax" type="text" value="1.2"/>
+            <span>%</span>
+            <input
+              id="propertyTax"
+              type="text"
+              value="1.2"
+              onchange="calculateAffordability()"
+            />
           </div>
 
           <div class="input-container percent">
             <label for="homeInsurance">Home insurance</label>
-			<span>/year</span>
-            <input id="homeInsurance" type="text" value="800 "/>
+            <span>/year</span>
+            <input
+              id="homeInsurance"
+              type="text"
+              value="800"
+              onchange="calculateAffordability()"
+            />
           </div>
 
           <div class="checkbox-container">
-            <input id="OMIinclude" type="checkbox" name="vehicle1" value="true" />
+            <input
+              id="OMIinclude"
+              type="checkbox"
+              name="vehicle1"
+              value="true"
+              onchange="calculateAffordability()"
+            />
             <label for="OMIinclude">Include PMI</label><br />
           </div>
 
           <div class="bothXContent">
             <label for="hOADues">HOA dues</label>
-			<span class="leftSpan">$</span>
-			<span class="rightSpan"> /month</span>
-            <input id="hOADues" type="text" value="0"/>
+            <span class="leftSpan">$</span>
+            <span class="rightSpan"> /month</span>
+            <input
+              id="hOADues"
+              type="text"
+              value="0"
+              onchange="calculateAffordability()"
+            />
           </div>
         </div>
       </form>
@@ -87,28 +146,34 @@
         <p>You can afford a house up to</p>
         <strong id="result">240,700</strong>
 
-        <input type="range" id="monthlyPayment" name="monthly payment"/>
+        <input
+          type="range"
+          id="monthlyPayment"
+          name="monthly payment"
+		  min="0"
+		  max="2246"
+          onchange="syncBarWithPercent()"
+        />
 
-		<div class="monthly-payment-information">
-			<div>
-				<img src="/images/wallet.png" />
-				<div>
-					<p>Monthly Payment</p>
-					<strong id="monthlyPaymentResult">1,500</strong>
-				</div>
-			</div>
-			<div>
-				<img src="/images/bar-chart.png" />
-				<div>
-					<p>Debt To Income Ratio</p>
-					<strong id="bebtTOIncomeRatio">43%</strong>
-				</div>
-			</div>
-		</div>
+        <div class="monthly-payment-information">
+          <div>
+            <img src="/images/wallet.png" />
+            <div>
+              <p>Monthly Payment</p>
+              <strong id="monthlyPaymentResult">1,837</strong>
+            </div>
+          </div>
+          <div class="debt-to-ratio-information">
+            <img src="/images/bar-chart.png" />
+            <div>
+              <p>Debt To Income Ratio</p>
+              <strong id="debtTOIncomeRatio">36</strong>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
-    <script type="module" src="app.js"></script>
-	<script type="module" src="helper.js"></script>
-
+    <script  src="app.js"></script>
+    <!-- <script type="module" src="helper.js"></script> -->
   </body>
 </html>

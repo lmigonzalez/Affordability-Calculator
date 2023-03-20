@@ -25,7 +25,9 @@ section {
   justify-content: space-between;
   align-items: start;
 }
-
+span{
+	color: #474E68;
+}
 .form-type {
   border-style: none;
   background-color: transparent;
@@ -209,4 +211,13 @@ label::after{
 
 .monthly-payment-information p{
 	font-size: 1.3rem;
+}
+
+
+.debt-to-ratio-information strong::after{
+	content: '%';
+}
+
+.debt-to-ratio-information strong::before{
+	content: '';
 }

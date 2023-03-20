@@ -47,9 +47,12 @@ function syncPercentWithBar() {
   monthlyPaymentInput.value = parseInt(
     monthlyIncomeAfterExpense * (debtToIncomeInput.value / 100)
   );
-  console.log(
-    parseInt(monthlyIncomeAfterExpense * (debtToIncomeInput.value / 100))
-  );
+
+  monthlyPaymentResult.textContent = monthlyPaymentInput.value
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+  debtTOIncomeRatio.textContent = debtToIncomeInput.value;
 }
 
 function syncBarWithPercent() {
@@ -57,6 +60,13 @@ function syncBarWithPercent() {
     annualIncomeInput.value / 12 - monthlyDebtsInput.value
   );
   debtToIncomeInput.value = parseInt(
+    (monthlyPaymentInput.value / monthlyIncomeAfterExpense) * 100
+  );
+  monthlyPaymentResult.textContent = monthlyPaymentInput.value
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+  debtTOIncomeRatio.textContent = parseInt(
     (monthlyPaymentInput.value / monthlyIncomeAfterExpense) * 100
   );
 }

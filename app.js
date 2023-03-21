@@ -23,7 +23,7 @@ const calculateAffordability = () => {
   let annualIncome = parseFloat(annualIncomeInput.value);
   let monthlyDebts = parseFloat(monthlyDebtsInput.value);
   let downPayment = parseFloat(downPaymentInput.value);
-  let debtToIncome = parseFloat(debtToIncomeInput.value) / 100;
+  let debtToIncome = parseFloat(debtToIncomeInput.value);
   let interestRate = parseFloat(interestRateInput.value);
   let loanTerm = parseFloat(loanTermInput.value);
 
@@ -112,14 +112,14 @@ function calculateResult(
 ) {
   const monthlyIncome = annualIncome / 12;
   const monthlyDebtRatio = monthlyDebts / monthlyIncome;
-  //const mortgagePaymentRatio = debtToIncome - monthlyDebtRatio;
+ 
   const interestRateDecimalMonthly = interestRate / 1200 ;  
 
   // Calculate the maximum affordable mortgage payment
-  //const maxMortgagePayment = (monthlyIncome) * mortgagePaymentRatio;
+  const maxMortgagePayment = (monthlyIncome) * debtToIncome/100;
 
   // Calculate the maximum affordable home price  
-  const monthlyMortagePayment = monthlyIncome - monthlyDebts;  
+  const monthlyMortagePayment = maxMortgagePayment - monthlyDebts;  
 
   const propertyPrice =
     (monthlyMortagePayment / (amortizedonstant(interestRateDecimalMonthly, loanTerm)))
@@ -158,3 +158,6 @@ function bigIntToNumber(numToConvert, decimals) {
   num.splice(-decimals, 0, '.')
   return Number(num.reduce((acc,curr)=>acc+=curr))
 }
+
+
+console.log(60000 / 12)

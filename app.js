@@ -112,17 +112,17 @@ function calculateResult(
 ) {
   const monthlyIncome = annualIncome / 12;
   const monthlyDebtRatio = monthlyDebts / monthlyIncome;
-  const mortgagePaymentRatio = debtToIncome - monthlyDebtRatio;
-  const interestRateDecimalMonthly = interestRate / 100 / 12;  
+  //const mortgagePaymentRatio = debtToIncome - monthlyDebtRatio;
+  const interestRateDecimalMonthly = interestRate / 1200 ;  
 
   // Calculate the maximum affordable mortgage payment
-  const maxMortgagePayment = (monthlyIncome) * mortgagePaymentRatio;
+  //const maxMortgagePayment = (monthlyIncome) * mortgagePaymentRatio;
 
   // Calculate the maximum affordable home price  
-  const monthlyMortagePayment = maxMortgagePayment - monthlyDebts;  
+  const monthlyMortagePayment = monthlyIncome - monthlyDebts;  
 
   const propertyPrice =
-    (monthlyMortagePayment / (amortizedConstant(interestRateDecimalMonthly, loanTerm)))
+    (monthlyMortagePayment / (amortizedonstant(interestRateDecimalMonthly, loanTerm)))
   
   
   const homePrice = propertyPrice + downPayment;

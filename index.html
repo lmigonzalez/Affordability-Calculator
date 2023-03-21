@@ -12,7 +12,35 @@
     <section>
       <form>
         <div class="input-container money">
-          <label for="annualIncome">Annual income</label>
+          <div class="label-and-btn">
+            <label for="annualIncome">Annual income</label>
+            <div class="popup-container">
+              <button
+                type="button"
+                onclick="toggleAnnualIncome()"
+                class="question-btn"
+              >
+                ?
+              </button>
+              <div id="annualIncomePopup" class="popup">
+                <div class="triangle"></div>
+                <div class="popup-head">
+                  <strong>Annual income</strong>
+                  <button type="button" onclick="toggleAnnualIncome()">
+                    <img src="/images/x-mark.png" alt="x mark" />
+                  </button>
+                </div>
+                <div class="popup-body">
+                  <p>
+                    Your total annual earnings before taxes, for you and your
+                    co-borrower. Annual income includes your base salary and any
+                    additional commissions, bonuses, tips, and investment
+                    income.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
           <span>$</span>
           <input
             id="annualIncome"
@@ -46,25 +74,95 @@
           />
         </div>
 
-        <button type="button" id="form-type" class="form-type" onclick="return toggleForm()">
+        <button
+          type="button"
+          id="form-type"
+          class="form-type"
+          onclick="return toggleForm()"
+        >
           Advanced
           <img src="/images/down-arrow.svg" alt="" />
         </button>
-		
+
         <div id="advancedForm" class="advancedFormContainer">
           <div class="input-container percent">
-            <label for="debtToIncome">Debt-to-income</label>
+            <div class="label-and-btn">
+              <label for="debtToIncome">Debt-to-income</label>
+
+              <div class="popup-container">
+                <button
+                  type="button"
+                  onclick="debtToIncomePopup()"
+                  class="question-btn"
+                >
+                  ?
+                </button>
+                <div id="debtToIncomePopup" class="popup">
+                  <div class="triangle"></div>
+                  <div class="popup-head">
+                    <strong>Debt-to-income (DTI) ratio</strong>
+                    <button type="button" onclick="debtToIncomePopup()">
+                      <img src="/images/x-mark.png" alt="x mark" />
+                    </button>
+                  </div>
+                  <div class="popup-body">
+                    <p>
+                      Enter the percentage of your income you are comfortable
+                      spending towards your mortgage. This number will also take
+                      monthly debts into account. <br />
+                      <br />
+                      Typically your DTI should be 36% or lower to qualify for a
+                      mortgage. Certain loans allow for higher DTIs, such as FHA
+                      loans (43%) and VA or USDA loans (41%).
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <span>%</span>
             <input
               id="debtToIncome"
               type="text"
-			  value="36"	
+              value="36"
               onchange="syncPercentWithBar()"
             />
           </div>
 
           <div class="input-container percent">
-            <label for="interestRate">Interest rate</label>
+            <div class="label-and-btn">
+              <label for="interestRate">Interest rate</label>
+
+              <div class="popup-container">
+                <button
+                  type="button"
+                  onclick="interestRatePopup()"
+                  class="question-btn"
+                >
+                  ?
+                </button>
+                <div id="interestRatePopup" class="popup">
+                  <div class="triangle"></div>
+                  <div class="popup-head">
+                    <strong>Interest rate</strong>
+                    <button type="button" onclick="interestRatePopup()">
+                      <img src="/images/x-mark.png" alt="x mark" />
+                    </button>
+                  </div>
+                  <div class="popup-body">
+                    <p>
+                      Representative interest rates are based upon a national,
+                      or state specific average from lenders quoting on Zillow
+                      for preliminary research purposes only. Actual available
+                      rates and monthly payment amounts are subject to market
+                      fluctuations and will depend on a number of factors,
+                      including geography and loan characteristics.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <span>%</span>
             <input
               id="interestRate"
@@ -75,7 +173,38 @@
           </div>
 
           <div class="input-container percent">
-            <label for="loanTerm">Loan term</label>
+            <div class="label-and-btn">
+              <label for="loanTerm">Loan term</label>
+              <div class="popup-container">
+                <button
+                  type="button"
+                  onclick="loanTermPopup()"
+                  class="question-btn"
+                >
+                  ?
+                </button>
+                <div id="loanTermPopup" class="popup">
+                  <div class="triangle"></div>
+                  <div class="popup-head">
+                    <strong>Interest rate</strong>
+                    <button type="button" onclick="loanTermPopup()">
+                      <img src="/images/x-mark.png" alt="x mark" />
+                    </button>
+                  </div>
+                  <div class="popup-body">
+                    <p>
+                      Representative interest rates are based upon a national,
+                      or state specific average from lenders quoting on Zillow
+                      for preliminary research purposes only. Actual available
+                      rates and monthly payment amounts are subject to market
+                      fluctuations and will depend on a number of factors,
+                      including geography and loan characteristics.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <span>/months</span>
             <input
               id="loanTerm"
@@ -150,8 +279,8 @@
           type="range"
           id="monthlyPayment"
           name="monthly payment"
-		  min="0"
-		  max="2246"
+          min="0"
+          max="2246"
           onchange="syncBarWithPercent()"
         />
 
@@ -173,7 +302,7 @@
         </div>
       </div>
     </section>
-    <script  src="app.js"></script>
+    <script src="app.js"></script>
     <!-- <script type="module"  src="test.js"></script> -->
     <!-- <script type="module" src="helper.js"></script> -->
   </body>

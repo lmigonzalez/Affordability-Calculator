@@ -84,6 +84,24 @@ const toggleForm = () => {
   document.getElementById('advancedForm').classList.toggle('showAdvanceForm');
 };
 
+function toggleAnnualIncome() {
+	console.log('toggle');
+	
+  document.getElementById('annualIncomePopup').classList.toggle('popup-off');
+}
+
+function debtToIncomePopup() {
+  document.getElementById('debtToIncomePopup').classList.toggle('popup-off');
+}
+function interestRatePopup() {
+  document.getElementById('interestRatePopup').classList.toggle('popup-off');
+}
+
+function loanTermPopup(){
+	document.getElementById('loanTermPopup').classList.toggle('popup-off');
+	
+}
+
 function calculateResult(
   annualIncome,
   monthlyDebts,

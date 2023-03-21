@@ -25,7 +25,7 @@ const calculateAffordability = () => {
   let downPayment = parseFloat(downPaymentInput.value);
   let debtToIncome = parseFloat(debtToIncomeInput.value) / 100;
   let interestRate = parseFloat(interestRateInput.value);
-  let loanTerm = parseFloat(loanTermInput.value) / 10;
+  let loanTerm = parseFloat(loanTermInput.value);
 
   //   console.log(
   //     annualIncome,
@@ -113,19 +113,48 @@ function calculateResult(
   const monthlyIncome = annualIncome / 12;
   const monthlyDebtRatio = monthlyDebts / monthlyIncome;
   const mortgagePaymentRatio = debtToIncome - monthlyDebtRatio;
-  const interestRateDecimal = interestRate / 100 / 12;
-  const loanTermMonths = loanTerm * 12;
+  const interestRateDecimalMonthly = interestRate / 100 / 12;  
 
   // Calculate the maximum affordable mortgage payment
-  const maxMortgagePayment = monthlyIncome * mortgagePaymentRatio;
+  const maxMortgagePayment = (monthlyIncome) * mortgagePaymentRatio;
 
-  // Calculate the maximum affordable home price
-  const loanAmount =
-    (maxMortgagePayment / interestRateDecimal) *
-    (1 - Math.pow(1 + interestRateDecimal, -loanTermMonths));
-  const homePrice = loanAmount + downPayment;
+  // Calculate the maximum affordable home price  
+  const monthlyMortagePayment = maxMortgagePayment - monthlyDebts;  
+
+  const propertyPrice =
+    (monthlyMortagePayment / (amortizedConstant(interestRateDecimalMonthly, loanTerm)))
+  
+  
+  const homePrice = propertyPrice + downPayment;
 
   document.getElementById('result').textContent = parseInt(homePrice)
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+function amortizedonstant(interestRate, loanTermInMonths) {
+  const [num, decimals] = toBigInt(interestRate);  
+  const pot = bigIntToNumber((1n * (10n ** BigInt(decimals)) + num) ** BigInt(loanTermInMonths),decimals*loanTermInMonths)
+  
+  let result = interestRate / (1 - 1/pot);
+  
+  return result;
+}
+
+
+function toBigInt(numToConvert) {
+  let num = numToConvert;
+  let decimals = 0;
+  
+  while (num !== Math.trunc(num)) {    
+    num = num*10
+    decimals = decimals + 1;
+  }
+  return [BigInt(num),decimals]
+}
+
+function bigIntToNumber(numToConvert, decimals) {  
+  const num = BigInt(numToConvert).toString().split('')
+  num.splice(-decimals, 0, '.')
+  return Number(num.reduce((acc,curr)=>acc+=curr))
 }

@@ -14,6 +14,7 @@ const loanTermInput = document.getElementById('loanTerm');
 // const hOADuesInput = document.getElementById('hOADues');
 
 const monthlyPaymentInput = document.getElementById('monthlyPayment');
+const result = document.getElementById('result');
 
 const monthlyPaymentResult = document.getElementById('monthlyPaymentResult');
 const debtTOIncomeRatio = document.getElementById('debtTOIncomeRatio');

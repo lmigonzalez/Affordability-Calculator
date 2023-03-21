@@ -2,14 +2,16 @@
 const annualIncomeInput = document.getElementById('annualIncome');
 const monthlyDebtsInput = document.getElementById('monthlyDebts');
 const downPaymentInput = document.getElementById('downPayment');
+
 //advanced
 const debtToIncomeInput = document.getElementById('debtToIncome');
 const interestRateInput = document.getElementById('interestRate');
 const loanTermInput = document.getElementById('loanTerm');
-const taxesIncludeInput = document.getElementById('taxesInclude');
-const propertyTaxInput = document.getElementById('propertyTax');
-const OMIIncludeInput = document.getElementById('OMIinclude');
-const hOADuesInput = document.getElementById('hOADues');
+
+// const taxesIncludeInput = document.getElementById('taxesInclude');
+// const propertyTaxInput = document.getElementById('propertyTax');
+// const OMIIncludeInput = document.getElementById('OMIinclude');
+// const hOADuesInput = document.getElementById('hOADues');
 
 const monthlyPaymentInput = document.getElementById('monthlyPayment');
 
@@ -17,27 +19,30 @@ const monthlyPaymentResult = document.getElementById('monthlyPaymentResult');
 const debtTOIncomeRatio = document.getElementById('debtTOIncomeRatio');
 
 const calculateAffordability = () => {
-  // monthly income after expenses
-  let monthlyIncomeAfterExpense = parseInt(
-    annualIncomeInput.value / 12 - monthlyDebtsInput.value
+  let annualIncome = parseFloat(annualIncomeInput.value);
+  let monthlyDebts = parseFloat(monthlyDebtsInput.value);
+  let downPayment = parseFloat(downPaymentInput.value);
+  let debtToIncome = parseFloat(debtToIncomeInput.value) / 100;
+  let interestRate = parseFloat(interestRateInput.value);
+  let loanTerm = parseFloat(loanTermInput.value) / 10;
+
+  //   console.log(
+  //     annualIncome,
+  //     monthlyDebts,
+  //     downPayment,
+  //     debtToIncome,
+  //     interestRate,
+  //     loanTerm
+  //   );
+
+  calculateResult(
+    annualIncome,
+    monthlyDebts,
+    downPayment,
+    debtToIncome,
+    interestRate,
+    loanTerm
   );
-
-  // slide bar min, max and value
-  monthlyPaymentInput.min = 0;
-  monthlyPaymentInput.max = parseInt(monthlyIncomeAfterExpense * 0.43);
-  monthlyPaymentInput.value = monthlyIncomeAfterExpense * 0.36;
-  console.log(monthlyIncomeAfterExpense);
-  // console.log(monthlyIncomeAfterExpense * 0.36);
-
-  monthlyPaymentInput.value =
-    monthlyIncomeAfterExpense * (debtToIncomeInput.value / 100);
-  // console.log(monthlyPaymentInput.value);
-
-  monthlyPaymentResult.textContent = monthlyPaymentInput.value
-    .toString()
-    .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-
-  debtTOIncomeRatio.textContent = debtToIncomeInput.value;
 };
 
 function syncPercentWithBar() {
@@ -53,6 +58,7 @@ function syncPercentWithBar() {
     .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
   debtTOIncomeRatio.textContent = debtToIncomeInput.value;
+  calculateAffordability();
 }
 
 function syncBarWithPercent() {
@@ -69,9 +75,38 @@ function syncBarWithPercent() {
   debtTOIncomeRatio.textContent = parseInt(
     (monthlyPaymentInput.value / monthlyIncomeAfterExpense) * 100
   );
+  calculateAffordability();
 }
 
 const toggleForm = () => {
   console.log('hello');
   document.getElementById('advancedForm').classList.toggle('showAdvanceForm');
 };
+
+function calculateResult(
+  annualIncome,
+  monthlyDebts,
+  downPayment,
+  debtToIncome,
+  interestRate,
+  loanTerm
+) {
+  const monthlyIncome = annualIncome / 12;
+  const monthlyDebtRatio = monthlyDebts / monthlyIncome;
+  const mortgagePaymentRatio = debtToIncome - monthlyDebtRatio;
+  const interestRateDecimal = interestRate / 100 / 12;
+  const loanTermMonths = loanTerm * 12;
+
+  // Calculate the maximum affordable mortgage payment
+  const maxMortgagePayment = monthlyIncome * mortgagePaymentRatio;
+
+  // Calculate the maximum affordable home price
+  const loanAmount =
+    (maxMortgagePayment / interestRateDecimal) *
+    (1 - Math.pow(1 + interestRateDecimal, -loanTermMonths));
+  const homePrice = loanAmount + downPayment;
+
+  document.getElementById('result').textContent = parseInt(homePrice)
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}

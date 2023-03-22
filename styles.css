@@ -58,8 +58,8 @@ input {
   margin-bottom: 0.8rem;
 }
 
-#monthlyPayment {
-  padding: 0;
+#dtiBar{
+	padding: 0;
 }
 
 .calculate-by-payment {

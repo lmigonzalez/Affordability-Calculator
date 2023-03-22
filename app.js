@@ -18,20 +18,20 @@ const loanTermInput = document.getElementById('loanTerm');
 // const OMIIncludeInput = document.getElementById('OMIinclude');
 // const hOADuesInput = document.getElementById('hOADues');
 
-const monthlyPaymentInput = document.getElementById('monthlyPayment');
+const dtiBar = document.getElementById('dtiBar');
 
-monthlyPaymentInput.max =
-  parseInt(annualIncomeInput.value  - monthlyDebtsInput.value) * 0.43;
-monthlyPaymentInput.value =
-  (annualIncomeInput.value  - monthlyDebtsInput.value) * 0.4;
-console.log(
-  parseInt(annualIncomeInput.value - monthlyDebtsInput.value) * 0.43
-);
+// monthlyPaymentInput.max =
+// parseInt(annualIncomeInput.value  - monthlyDebtsInput.value) * 0.43;
+// monthlyPaymentInput.value =
+//   (annualIncomeInput.value  - monthlyDebtsInput.value) * 0.4;
+// console.log(
+//   parseInt(annualIncomeInput.value - monthlyDebtsInput.value) * 0.43
+// );
 
 const result = document.getElementById('result');
 
 const monthlyPaymentResult = document.getElementById('monthlyPaymentResult');
-const debtTOIncomeRatio = document.getElementById('debtTOIncomeRatio');
+// const debtTOIncomeRatio = document.getElementById('debtTOIncomeRatio');
 
 const calculateAffordability = () => {
 
@@ -44,25 +44,7 @@ const calculateAffordability = () => {
   let debtToIncome = parseFloat(debtToIncomeInput.value);
   let interestRate = parseFloat(interestRateInput.value);
   let loanTerm = parseFloat(loanTermInput.value);
-
-  //   console.log(
-  //     annualIncome,
-  //     monthlyDebts,
-  //     downPayment,
-  //     debtToIncome,
-  //     interestRate,
-  //     loanTerm
-  //   );
-
-  //here
-
-
-  monthlyPaymentInput.max =
-    parseInt(annualIncomeInput.value - monthlyDebtsInput.value) * 0.43;
-  monthlyPaymentInput.value =
-    (annualIncomeInput.value - monthlyDebtsInput.value) *
-    (debtToIncome / 100);
-
+  
   //   here
   const income = isActive ? annualIncome : annualIncome / 12; 
 
@@ -82,36 +64,28 @@ const calculateAffordability = () => {
   );
 };
 
-function syncPercentWithBar() {
-  let monthlyIncomeAfterExpense = parseInt(
-    annualIncomeInput.value - monthlyDebtsInput.value
-  );
-  monthlyPaymentInput.value = parseInt(
-    monthlyIncomeAfterExpense * (debtToIncomeInput.value / 100)
-  );
+function syncPercentWithBar() {  
+  dtiBar.value = parseInt(debtToIncomeInput.value);  
+  
+  const payment = parseInt((annualIncomeInput.value / 12) * debtToIncomeInput.value / 100 - monthlyDebtsInput.value)
 
-  monthlyPaymentResult.textContent = monthlyPaymentInput.value
+  monthlyPaymentResult.textContent = payment>0?payment:0
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
-  debtTOIncomeRatio.textContent = debtToIncomeInput.value;
+  
   calculateAffordability();
 }
 
-function syncBarWithPercent() {
-  let monthlyIncomeAfterExpense = parseInt(
-    annualIncomeInput.value - monthlyDebtsInput.value
-  );
-  debtToIncomeInput.value = parseInt(
-    (monthlyPaymentInput.value / monthlyIncomeAfterExpense) * 100
-  );
-  monthlyPaymentResult.textContent = monthlyPaymentInput.value
+function syncBarWithPercent() {  
+  debtToIncomeInput.value = parseInt(dtiBar.value)
+
+ const payment = parseInt((annualIncomeInput.value / 12) * debtToIncomeInput.value / 100 - monthlyDebtsInput.value)
+
+  monthlyPaymentResult.textContent = payment>0?payment:0
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-
-  debtTOIncomeRatio.textContent = parseInt(
-    (monthlyPaymentInput.value / monthlyIncomeAfterExpense) * 100
-  );
+   
   calculateAffordability();
 }
 

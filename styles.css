@@ -63,23 +63,23 @@ input {
 	padding: 0;
 }
 
-.calculate-by-payment{
-	display: flex;
-	align-items: center;
-	margin: 0 0 1rem 0;
+.calculate-by-payment {
+  display: flex;
+  align-items: center;
+  margin: 0 0 1rem 0;
 }
 
-.calculate-by-payment button{
-	color: #3e54ac;
-	background-color: transparent;
-	border-style: none;
-	margin-left: 0.5rem;
-	font-size: 1rem;
-	cursor: pointer;
+.calculate-by-payment button {
+  color: #3e54ac;
+  background-color: transparent;
+  border-style: none;
+  margin-left: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
 }
 
-.disabled-input{
-	display: none;
+.disabled-input {
+  display: none;
 }
 
 .input-container.money input {
@@ -146,6 +146,7 @@ label::after {
 
 .result-container {
   width: 100%;
+  padding: 0 1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -323,4 +324,36 @@ label::after {
 .popup-body {
   padding: 0.8rem 1rem;
   line-height: 1.5;
+}
+
+@media (max-width: 800px) {
+  section {
+    flex-direction: column;
+  }
+    .result-container{
+		margin-top: 3rem;
+	}
+  .result-container input{
+	width: 100%;
+  }
+  form{
+	  width: 100%;
+	}
+	.input-container{
+	width: 100%;
+}
+
+  input{
+	width: 100%;
+  }
+
+  .monthly-payment-information{
+	flex-direction: column;
+	justify-content: center;
+	align-items: start;
+  }
+
+  .debt-to-ratio-information{
+	margin-top: 2rem;
+  }
 }

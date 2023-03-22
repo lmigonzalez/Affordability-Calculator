@@ -142,9 +142,11 @@ function handlePaymentOption(){
 	let monthlyInput = document.getElementById('monthly-income')
 	let maximumInput = document.getElementById('maximum-payment')
 	let monthlyDebts = document.getElementById('monthly-debts')
+	let dti = document.getElementById('dti')
 	maximumInput.classList.toggle('disabled-input')
 	monthlyInput.classList.toggle('disabled-input')
 	monthlyDebts.classList.toggle('disabled-input')
+	dti.classList.toggle('disabled-input')
 	isActive = !isActive
 }
 

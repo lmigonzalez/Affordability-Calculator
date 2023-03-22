@@ -139,7 +139,7 @@ function calculateResult(
   const maxMortgagePayment = (monthlyIncome * debtToIncome) / 100;
 
   // Calculate the maximum affordable home price
-  const monthlyMortagePayment = maxMortgagePayment - monthlyDebts;
+  const monthlyMortagePayment = maxMortgagePayment>monthlyDebts?maxMortgagePayment - monthlyDebts:0;
 
   const propertyPrice =
     (monthlyMortagePayment / (amortizedonstant(interestRateDecimalMonthly, loanTerm)))

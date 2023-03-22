@@ -52,8 +52,7 @@ const calculateAffordability = () => {
     downPayment,    
     interestRate,
     loanTerm
-  ))
-  
+  )) 
 
    
 };
@@ -63,9 +62,7 @@ function syncPercentWithBar() {
   
   let payment = parseInt((annualIncomeInput.value / 12) * debtToIncomeInput.value / 100 - monthlyDebtsInput.value)
 
-  monthlyPaymentResult.textContent = payment>0?payment:0
-    .toString()
-    
+  monthlyPaymentResult.textContent = payment>0?payment:0   
   
   calculateAffordability();
 }
@@ -73,11 +70,9 @@ function syncPercentWithBar() {
 function syncBarWithPercent() {  
   debtToIncomeInput.value = parseInt(dtiBar.value)
 
- let payment = parseInt((annualIncomeInput.value / 12) * debtToIncomeInput.value / 100 - monthlyDebtsInput.value)
+  let payment = parseInt((annualIncomeInput.value / 12) * debtToIncomeInput.value / 100 - monthlyDebtsInput.value)
 
-  monthlyPaymentResult.textContent = payment>0?payment:0
-    .toString()
-    
+  monthlyPaymentResult.textContent = payment>0?payment:0   
    
   calculateAffordability();
 }

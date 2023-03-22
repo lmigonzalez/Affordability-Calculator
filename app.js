@@ -4,7 +4,7 @@ let isActive = false
 
 //simple
 const annualIncomeInput = document.getElementById('annualIncome');
-const maximumPayment = document.getElementById('max-payment');
+const maximumPaymentInput = document.getElementById('max-payment');
 const monthlyDebtsInput = document.getElementById('monthlyDebts');
 const downPaymentInput = document.getElementById('downPayment');
 
@@ -35,44 +35,34 @@ const monthlyPaymentResult = document.getElementById('monthlyPaymentResult');
 
 const calculateAffordability = () => {
 
-  let annualIncome = parseFloat(annualIncomeInput.value);
-  let maximumPayment = parseFloat(maximumPayment.value);
-
-  
+  let annualIncome = parseFloat(annualIncomeInput.value);  
   let monthlyDebts = parseFloat(monthlyDebtsInput.value);
   let downPayment = parseFloat(downPaymentInput.value);
   let debtToIncome = parseFloat(debtToIncomeInput.value);
   let interestRate = parseFloat(interestRateInput.value);
-  let loanTerm = parseFloat(loanTermInput.value);
-  
-  //   here
-  const income = isActive ? annualIncome : annualIncome / 12; 
+  let loanTerm = parseFloat(loanTermInput.value); 
+  let maximumPayment = parseFloat(maximumPaymentInput.value);
 
-   // Calculate the maximum affordable mortgage payment
-  const maxMortgagePayment = isActive?(income * debtToIncome) / 100: income;
 
-  // Calculate the maximum affordable home price
-  const monthlyMortgagePayment = maxMortgagePayment>monthlyDebts?maxMortgagePayment - monthlyDebts:0;
+  let monthlyMortgagePayment = !isActive? (annualIncome/12)*debtToIncome/100 - monthlyDebts: maximumPayment
   
   
-
-  calculateResult(
+  result.textContent = parseInt(calculateResult(
     monthlyMortgagePayment,
     downPayment,    
     interestRate,
     loanTerm
-  );
+  )) 
+
+   
 };
 
 function syncPercentWithBar() {  
   dtiBar.value = parseInt(debtToIncomeInput.value);  
   
-  const payment = parseInt((annualIncomeInput.value / 12) * debtToIncomeInput.value / 100 - monthlyDebtsInput.value)
+  let payment = parseInt((annualIncomeInput.value / 12) * debtToIncomeInput.value / 100 - monthlyDebtsInput.value)
 
-  monthlyPaymentResult.textContent = payment>0?payment:0
-    .toString()
-    .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-
+  monthlyPaymentResult.textContent = payment>0?payment:0   
   
   calculateAffordability();
 }
@@ -80,11 +70,9 @@ function syncPercentWithBar() {
 function syncBarWithPercent() {  
   debtToIncomeInput.value = parseInt(dtiBar.value)
 
- const payment = parseInt((annualIncomeInput.value / 12) * debtToIncomeInput.value / 100 - monthlyDebtsInput.value)
+  let payment = parseInt((annualIncomeInput.value / 12) * debtToIncomeInput.value / 100 - monthlyDebtsInput.value)
 
-  monthlyPaymentResult.textContent = payment>0?payment:0
-    .toString()
-    .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  monthlyPaymentResult.textContent = payment>0?payment:0   
    
   calculateAffordability();
 }
@@ -136,11 +124,10 @@ function calculateResult(
   const propertyPrice =
     (monthlyMortgagePayment / (amortizedonstant(interestRateDecimalMonthly, loanTerm)))	
   
+  
   const homePrice = (propertyPrice<0?0:propertyPrice) + downPayment;
 
-  document.getElementById('result').textContent = parseInt(homePrice)
-    .toString()
-    .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  return homePrice
 }
 
 function amortizedonstant(interestRate, loanTermInMonths) {

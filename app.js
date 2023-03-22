@@ -52,12 +52,12 @@ const calculateAffordability = () => {
   const maxMortgagePayment = isActive?(income * debtToIncome) / 100: income;
 
   // Calculate the maximum affordable home price
-  const monthlyMortagePayment = maxMortgagePayment>monthlyDebts?maxMortgagePayment - monthlyDebts:0;
+  const monthlyMortgagePayment = maxMortgagePayment>monthlyDebts?maxMortgagePayment - monthlyDebts:0;
   
   
 
   calculateResult(
-    monthlyMortagePayment,
+    monthlyMortgagePayment,
     downPayment,    
     interestRate,
     loanTerm
@@ -125,7 +125,7 @@ function handlePaymentOption(){
 }
 
 function calculateResult( 
-  monthlyMortagePayment,
+  monthlyMortgagePayment,
   downPayment,  
   interestRate,
   loanTerm
@@ -134,7 +134,7 @@ function calculateResult(
   const interestRateDecimalMonthly = interestRate / 1200;
  
   const propertyPrice =
-    (monthlyMortagePayment / (amortizedonstant(interestRateDecimalMonthly, loanTerm)))	
+    (monthlyMortgagePayment / (amortizedonstant(interestRateDecimalMonthly, loanTerm)))	
   
   const homePrice = (propertyPrice<0?0:propertyPrice) + downPayment;
 

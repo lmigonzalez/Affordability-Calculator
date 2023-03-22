@@ -123,24 +123,23 @@ function loanTermPopup() {
 }
 
 function calculateResult(
-  annualIncome,
+  Income,
   monthlyDebts,
   downPayment,
   debtToIncome,
   interestRate,
   loanTerm
-) {
-  const monthlyIncome = annualIncome / 12;
-  const monthlyDebtRatio = monthlyDebts / monthlyIncome;
+) { 
+  
 
   const interestRateDecimalMonthly = interestRate / 1200;
 
   // Calculate the maximum affordable mortgage payment
-  const maxMortgagePayment = (monthlyIncome * debtToIncome) / 100;
+  const maxMortgagePayment = (Income * debtToIncome) / 100;
 
   // Calculate the maximum affordable home price
   const monthlyMortagePayment = maxMortgagePayment>monthlyDebts?maxMortgagePayment - monthlyDebts:0;
-
+  
   const propertyPrice =
     (monthlyMortagePayment / (amortizedonstant(interestRateDecimalMonthly, loanTerm)))
   

@@ -1,5 +1,5 @@
 //this has to change
-let condition = true;
+
 let isActive = false
 
 //simple
@@ -60,10 +60,10 @@ const calculateAffordability = () => {
     (debtToIncome / 100);
 
   //   here
-  const income = condition ? annualIncome : annualIncome / 12; 
+  const income = isActive ? annualIncome : annualIncome / 12; 
 
    // Calculate the maximum affordable mortgage payment
-  const maxMortgagePayment = condition?(income * debtToIncome) / 100: income;
+  const maxMortgagePayment = isActive?(income * debtToIncome) / 100: income;
 
   // Calculate the maximum affordable home price
   const monthlyMortagePayment = maxMortgagePayment>monthlyDebts?maxMortgagePayment - monthlyDebts:0;

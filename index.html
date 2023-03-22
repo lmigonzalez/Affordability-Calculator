@@ -46,7 +46,7 @@
             id="annualIncome"
             type="text"
             name="annualIncome"
-            value="6000"
+            value="70000"
             class="money-input"
             onchange="calculateAffordability()"
           />
@@ -293,10 +293,11 @@
 
         <input
           type="range"
-          id="monthlyPayment"
-          name="monthly payment"
+          id="dtiBar"
+          name="dtibar"
           min="0"
-          max="100"
+          max="43"
+          value="40"
           onchange="syncBarWithPercent()"
         />
 
@@ -308,13 +309,13 @@
               <strong id="monthlyPaymentResult">1,837</strong>
             </div>
           </div>
-          <div class="debt-to-ratio-information">
+          <!-- <div class="debt-to-ratio-information">
             <img src="/images/bar-chart.png" />
             <div>
               <p>Debt To Income Ratio</p>
               <strong id="debtTOIncomeRatio">36</strong>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </section>

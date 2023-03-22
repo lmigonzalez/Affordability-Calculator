@@ -125,7 +125,7 @@ function calculateResult(
     (monthlyMortagePayment / (amortizedonstant(interestRateDecimalMonthly, loanTerm)))
   
   
-  const homePrice = propertyPrice + downPayment;
+  const homePrice = propertyPrice<downPayment?propertyPrice:0 + downPayment;
 
   document.getElementById('result').textContent = parseInt(homePrice)
     .toString()

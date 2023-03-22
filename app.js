@@ -4,6 +4,7 @@ let isActive = false
 
 //simple
 const annualIncomeInput = document.getElementById('annualIncome');
+const maximumPayment = document.getElementById('max-payment');
 const monthlyDebtsInput = document.getElementById('monthlyDebts');
 const downPaymentInput = document.getElementById('downPayment');
 
@@ -35,6 +36,9 @@ const debtTOIncomeRatio = document.getElementById('debtTOIncomeRatio');
 const calculateAffordability = () => {
 
   let annualIncome = parseFloat(annualIncomeInput.value);
+  let maximumPayment = parseFloat(maximumPayment.value);
+
+  
   let monthlyDebts = parseFloat(monthlyDebtsInput.value);
   let downPayment = parseFloat(downPaymentInput.value);
   let debtToIncome = parseFloat(debtToIncomeInput.value);

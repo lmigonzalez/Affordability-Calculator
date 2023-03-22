@@ -1,4 +1,4 @@
- 
+calculatAffordability() 
 function calculatAffordability() {
   // Input parameters
   const annualIncome = 60000;
@@ -23,6 +23,7 @@ function calculatAffordability() {
   const finalPrice = propertyPrice;
   
   console.log(finalPrice)
+
 
 }
 

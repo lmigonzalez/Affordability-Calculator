@@ -14,12 +14,22 @@ const loanTermInput = document.getElementById('loanTerm');
 // const hOADuesInput = document.getElementById('hOADues');
 
 const monthlyPaymentInput = document.getElementById('monthlyPayment');
+
+monthlyPaymentInput.max =
+  parseInt(annualIncomeInput.value / 12 - monthlyDebtsInput.value) * 0.43;
+monthlyPaymentInput.value =
+  (annualIncomeInput.value / 12 - monthlyDebtsInput.value) * 0.4;
+console.log(
+  parseInt(annualIncomeInput.value / 12 - monthlyDebtsInput.value) * 0.43
+);
+
 const result = document.getElementById('result');
 
 const monthlyPaymentResult = document.getElementById('monthlyPaymentResult');
 const debtTOIncomeRatio = document.getElementById('debtTOIncomeRatio');
 
 const calculateAffordability = () => {
+
   let annualIncome = parseFloat(annualIncomeInput.value);
   let monthlyDebts = parseFloat(monthlyDebtsInput.value);
   let downPayment = parseFloat(downPaymentInput.value);
@@ -35,6 +45,17 @@ const calculateAffordability = () => {
   //     interestRate,
   //     loanTerm
   //   );
+
+  //here
+
+
+  monthlyPaymentInput.max =
+    parseInt(annualIncomeInput.value / 12 - monthlyDebtsInput.value) * 0.43;
+  monthlyPaymentInput.value =
+    (annualIncomeInput.value / 12 - monthlyDebtsInput.value) *
+    (debtToIncome / 100);
+
+  //   here
 
   calculateResult(
     annualIncome,
@@ -85,8 +106,8 @@ const toggleForm = () => {
 };
 
 function toggleAnnualIncome() {
-	console.log('toggle');
-	
+  console.log('toggle');
+
   document.getElementById('annualIncomePopup').classList.toggle('popup-off');
 }
 
@@ -97,9 +118,8 @@ function interestRatePopup() {
   document.getElementById('interestRatePopup').classList.toggle('popup-off');
 }
 
-function loanTermPopup(){
-	document.getElementById('loanTermPopup').classList.toggle('popup-off');
-	
+function loanTermPopup() {
+  document.getElementById('loanTermPopup').classList.toggle('popup-off');
 }
 
 function calculateResult(
@@ -112,19 +132,19 @@ function calculateResult(
 ) {
   const monthlyIncome = annualIncome / 12;
   const monthlyDebtRatio = monthlyDebts / monthlyIncome;
- 
-  const interestRateDecimalMonthly = interestRate / 1200 ;  
+
+  const interestRateDecimalMonthly = interestRate / 1200;
 
   // Calculate the maximum affordable mortgage payment
-  const maxMortgagePayment = (monthlyIncome) * debtToIncome/100;
+  const maxMortgagePayment = (monthlyIncome * debtToIncome) / 100;
 
-  // Calculate the maximum affordable home price  
-  const monthlyMortagePayment = maxMortgagePayment - monthlyDebts;  
+  // Calculate the maximum affordable home price
+  const monthlyMortagePayment = maxMortgagePayment - monthlyDebts;
 
   const propertyPrice =
-    (monthlyMortagePayment / (amortizedonstant(interestRateDecimalMonthly, loanTerm)))
-  
-  
+    monthlyMortagePayment /
+    amortizedonstant(interestRateDecimalMonthly, loanTerm);
+
   const homePrice = propertyPrice + downPayment;
 
   document.getElementById('result').textContent = parseInt(homePrice)
@@ -133,31 +153,32 @@ function calculateResult(
 }
 
 function amortizedonstant(interestRate, loanTermInMonths) {
-  const [num, decimals] = toBigInt(interestRate);  
-  const pot = bigIntToNumber((1n * (10n ** BigInt(decimals)) + num) ** BigInt(loanTermInMonths),decimals*loanTermInMonths)
-  
-  let result = interestRate / (1 - 1/pot);
-  
+  const [num, decimals] = toBigInt(interestRate);
+  const pot = bigIntToNumber(
+    (1n * 10n ** BigInt(decimals) + num) ** BigInt(loanTermInMonths),
+    decimals * loanTermInMonths
+  );
+
+  let result = interestRate / (1 - 1 / pot);
+
   return result;
 }
-
 
 function toBigInt(numToConvert) {
   let num = numToConvert;
   let decimals = 0;
-  
-  while (num !== Math.trunc(num)) {    
-    num = num*10
+
+  while (num !== Math.trunc(num)) {
+    num = num * 10;
     decimals = decimals + 1;
   }
-  return [BigInt(num),decimals]
+  return [BigInt(num), decimals];
 }
 
-function bigIntToNumber(numToConvert, decimals) {  
-  const num = BigInt(numToConvert).toString().split('')
-  num.splice(-decimals, 0, '.')
-  return Number(num.reduce((acc,curr)=>acc+=curr))
+function bigIntToNumber(numToConvert, decimals) {
+  const num = BigInt(numToConvert).toString().split('');
+  num.splice(-decimals, 0, '.');
+  return Number(num.reduce((acc, curr) => (acc += curr)));
 }
 
-
-console.log(60000 / 12)
+console.log(60000 / 12);

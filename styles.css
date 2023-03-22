@@ -59,6 +59,10 @@ input {
   margin-bottom: 0.8rem;
 }
 
+#monthlyPayment{
+	padding: 0;
+}
+
 .input-container.money input {
   padding: 0 2rem;
 }

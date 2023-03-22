@@ -11,7 +11,7 @@
     <h1>Affordability Calculator</h1>
     <section>
       <form>
-        <div class="input-container money">
+        <div id="monthly-income" class="input-container money">
           <div class="label-and-btn">
             <label for="annualIncome">Average Monthly Income</label>
             <!-- <div class="popup-container">
@@ -52,7 +52,27 @@
           />
         </div>
 
-        <div class="input-container money">
+        <div id="maximum-payment" class="input-container money disabled-input">
+          <div class="label-and-btn">
+            <label for="annualIncome">Maximum payment</label>
+          </div>
+          <span>$</span>
+          <input
+            id="annualIncome"
+            type="text"
+            name="annualIncome"
+            value="1850"
+            class="money-input"
+            onchange="calculateAffordability()"
+          />
+        </div>
+
+        <div class="calculate-by-payment">
+          <p>Calculate by</p>
+          <button onclick="handlePaymentOption()" type="button">payment</button>
+        </div>
+
+        <div id="monthly-debts" class="input-container money">
           <label for="monthlyDebts">Monthly debts</label>
           <span>$</span>
           <input
@@ -111,9 +131,9 @@
                       spending towards your mortgage. This number will also take
                       monthly debts into account. <br />
                       <br />
-                      Typically your DTI should be 36% or lower to qualify for a
-                      mortgage. Certain loans allow for higher DTIs, such as FHA
-                      loans (43%) and VA or USDA loans (41%).
+                      Typically your DTI should be 40%-45% or lower to qualify
+                      for a mortgage. Certain loans allow for higher DTIs, such
+                      as FHA loans (43%) and VA or USDA loans (41%).
                     </p>
                   </div>
                 </div>
@@ -151,12 +171,8 @@
                   </div>
                   <div class="popup-body">
                     <p>
-                      Representative interest rates are based upon a national,
-                      or state specific average from lenders quoting on Zillow
-                      for preliminary research purposes only. Actual available
-                      rates and monthly payment amounts are subject to market
-                      fluctuations and will depend on a number of factors,
-                      including geography and loan characteristics.
+                      Your interest rate is usually determined by your lender
+                      and different variables may impact this rate.
                     </p>
                   </div>
                 </div>

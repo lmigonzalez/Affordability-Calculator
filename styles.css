@@ -63,6 +63,25 @@ input {
 	padding: 0;
 }
 
+.calculate-by-payment{
+	display: flex;
+	align-items: center;
+	margin: 0 0 1rem 0;
+}
+
+.calculate-by-payment button{
+	color: #3e54ac;
+	background-color: transparent;
+	border-style: none;
+	margin-left: 0.5rem;
+	font-size: 1rem;
+	cursor: pointer;
+}
+
+.disabled-input{
+	display: none;
+}
+
 .input-container.money input {
   padding: 0 2rem;
 }

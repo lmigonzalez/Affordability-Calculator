@@ -1,6 +1,6 @@
 //this has to change
 let condition = true;
-
+let isActive = false
 
 //simple
 const annualIncomeInput = document.getElementById('annualIncome');
@@ -131,6 +131,17 @@ function interestRatePopup() {
 
 function loanTermPopup() {
   document.getElementById('loanTermPopup').classList.toggle('popup-off');
+}
+
+
+function handlePaymentOption(){
+	let monthlyInput = document.getElementById('monthly-income')
+	let maximumInput = document.getElementById('maximum-payment')
+	let monthlyDebts = document.getElementById('monthly-debts')
+	maximumInput.classList.toggle('disabled-input')
+	monthlyInput.classList.toggle('disabled-input')
+	monthlyDebts.classList.toggle('disabled-input')
+	isActive = !isActive
 }
 
 function calculateResult( 

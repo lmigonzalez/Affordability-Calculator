@@ -181,4 +181,3 @@ function bigIntToNumber(numToConvert, decimals) {
   return Number(num.reduce((acc, curr) => (acc += curr)));
 }
 
-console.log(60000 / 12);

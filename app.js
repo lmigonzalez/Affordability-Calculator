@@ -16,11 +16,11 @@ const loanTermInput = document.getElementById('loanTerm');
 const monthlyPaymentInput = document.getElementById('monthlyPayment');
 
 monthlyPaymentInput.max =
-  parseInt(annualIncomeInput.value / 12 - monthlyDebtsInput.value) * 0.43;
+  parseInt(annualIncomeInput.value  - monthlyDebtsInput.value) * 0.43;
 monthlyPaymentInput.value =
-  (annualIncomeInput.value / 12 - monthlyDebtsInput.value) * 0.4;
+  (annualIncomeInput.value  - monthlyDebtsInput.value) * 0.4;
 console.log(
-  parseInt(annualIncomeInput.value / 12 - monthlyDebtsInput.value) * 0.43
+  parseInt(annualIncomeInput.value - monthlyDebtsInput.value) * 0.43
 );
 
 const result = document.getElementById('result');
@@ -50,9 +50,9 @@ const calculateAffordability = () => {
 
 
   monthlyPaymentInput.max =
-    parseInt(annualIncomeInput.value / 12 - monthlyDebtsInput.value) * 0.43;
+    parseInt(annualIncomeInput.value - monthlyDebtsInput.value) * 0.43;
   monthlyPaymentInput.value =
-    (annualIncomeInput.value / 12 - monthlyDebtsInput.value) *
+    (annualIncomeInput.value - monthlyDebtsInput.value) *
     (debtToIncome / 100);
 
   //   here
@@ -69,7 +69,7 @@ const calculateAffordability = () => {
 
 function syncPercentWithBar() {
   let monthlyIncomeAfterExpense = parseInt(
-    annualIncomeInput.value / 12 - monthlyDebtsInput.value
+    annualIncomeInput.value - monthlyDebtsInput.value
   );
   monthlyPaymentInput.value = parseInt(
     monthlyIncomeAfterExpense * (debtToIncomeInput.value / 100)
@@ -85,7 +85,7 @@ function syncPercentWithBar() {
 
 function syncBarWithPercent() {
   let monthlyIncomeAfterExpense = parseInt(
-    annualIncomeInput.value / 12 - monthlyDebtsInput.value
+    annualIncomeInput.value - monthlyDebtsInput.value
   );
   debtToIncomeInput.value = parseInt(
     (monthlyPaymentInput.value / monthlyIncomeAfterExpense) * 100
@@ -146,7 +146,7 @@ function calculateResult(
   
 	
   
-  const homePrice = propertyPrice < downPayment ? propertyPrice:0 + downPayment;
+  const homePrice = (propertyPrice>downPayment?propertyPrice:0) + downPayment;
 
   document.getElementById('result').textContent = parseInt(homePrice)
     .toString()

@@ -1,3 +1,7 @@
+//this has to change
+let condition = true;
+
+
 //simple
 const annualIncomeInput = document.getElementById('annualIncome');
 const monthlyDebtsInput = document.getElementById('monthlyDebts');
@@ -56,12 +60,19 @@ const calculateAffordability = () => {
     (debtToIncome / 100);
 
   //   here
+  const income = condition ? annualIncome : annualIncome / 12; 
+
+   // Calculate the maximum affordable mortgage payment
+  const maxMortgagePayment = condition?(income * debtToIncome) / 100: income;
+
+  // Calculate the maximum affordable home price
+  const monthlyMortagePayment = maxMortgagePayment>monthlyDebts?maxMortgagePayment - monthlyDebts:0;
+  
+  
 
   calculateResult(
-    annualIncome,
-    monthlyDebts,
-    downPayment,
-    debtToIncome,
+    monthlyMortagePayment,
+    downPayment,    
     interestRate,
     loanTerm
   );
@@ -122,30 +133,19 @@ function loanTermPopup() {
   document.getElementById('loanTermPopup').classList.toggle('popup-off');
 }
 
-function calculateResult(
-  Income,
-  monthlyDebts,
-  downPayment,
-  debtToIncome,
+function calculateResult( 
+  monthlyMortagePayment,
+  downPayment,  
   interestRate,
   loanTerm
 ) { 
-  
 
   const interestRateDecimalMonthly = interestRate / 1200;
-
-  // Calculate the maximum affordable mortgage payment
-  const maxMortgagePayment = (Income * debtToIncome) / 100;
-
-  // Calculate the maximum affordable home price
-  const monthlyMortagePayment = maxMortgagePayment>monthlyDebts?maxMortgagePayment - monthlyDebts:0;
-  
+ 
   const propertyPrice =
-    (monthlyMortagePayment / (amortizedonstant(interestRateDecimalMonthly, loanTerm)))
+    (monthlyMortagePayment / (amortizedonstant(interestRateDecimalMonthly, loanTerm)))	
   
-	
-  
-  const homePrice = (propertyPrice>downPayment?propertyPrice:0) + downPayment;
+  const homePrice = (propertyPrice<0?0:propertyPrice) + downPayment;
 
   document.getElementById('result').textContent = parseInt(homePrice)
     .toString()

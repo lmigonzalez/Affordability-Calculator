@@ -3,7 +3,7 @@
 let isActive = false
 
 //simple
-const annualIncomeInput = document.getElementById('annualIncome');
+const monthlyIncomeInput = document.getElementById('monthlyIncome');
 const maximumPaymentInput = document.getElementById('max-payment');
 const monthlyDebtsInput = document.getElementById('monthlyDebts');
 const downPaymentInput = document.getElementById('downPayment');
@@ -20,11 +20,11 @@ const loanTermInput = document.getElementById('loanTerm');
 const dtiBar = document.getElementById('dtiBar');
 
 // monthlyPaymentInput.max =
-// parseInt(annualIncomeInput.value  - monthlyDebtsInput.value) * 0.43;
+// parseInt(monthlyIncomeInput.value  - monthlyDebtsInput.value) * 0.43;
 // monthlyPaymentInput.value =
-//   (annualIncomeInput.value  - monthlyDebtsInput.value) * 0.4;
+//   (monthlyIncomeInput.value  - monthlyDebtsInput.value) * 0.4;
 // console.log(
-//   parseInt(annualIncomeInput.value - monthlyDebtsInput.value) * 0.43
+//   parseInt(monthlyIncomeInput.value - monthlyDebtsInput.value) * 0.43
 // );
 
 const result = document.getElementById('result');
@@ -34,7 +34,7 @@ const debtTOIncomeRatio = document.getElementById('debtTOIncomeRatio');
 
 const calculateAffordability = () => {
 
-  let annualIncome = parseFloat(annualIncomeInput.value);  
+  let monthlyIncome = parseFloat(monthlyIncomeInput.value);  
   let monthlyDebts = parseFloat(monthlyDebtsInput.value);
   let downPayment = parseFloat(downPaymentInput.value);
   let debtToIncome = parseFloat(debtToIncomeInput.value);
@@ -43,7 +43,7 @@ const calculateAffordability = () => {
   let maximumPayment = parseFloat(maximumPaymentInput.value);
 
 
-  let monthlyMortgagePayment = !isActive? (annualIncome)*(debtToIncome/100) - monthlyDebts: maximumPayment
+  let monthlyMortgagePayment = !isActive? (monthlyIncome)*(debtToIncome/100) - monthlyDebts: maximumPayment
   
   
   result.textContent = parseInt(calculateResult(
@@ -69,7 +69,7 @@ function syncBarWithPercent() {
   debtToIncomeInput.value = parseInt(dtiBar.value) 
   debtTOIncomeRatio.textContent = !isActive? parseInt(dtiBar.value):0
 
-  let payment = parseInt((annualIncomeInput.value*debtToIncomeInput.value) / 100 - monthlyDebtsInput.value)
+  let payment = parseInt((monthlyIncomeInput.value*debtToIncomeInput.value) / 100 - monthlyDebtsInput.value)
 
   monthlyPaymentResult.textContent = (isActive? dtiBar.value:(payment > 0 ? payment : 0))
   
@@ -93,10 +93,10 @@ const toggleForm = () => {
   document.getElementById('advancedForm').classList.toggle('showAdvanceForm');
 };
 
-function toggleAnnualIncome() {
+function togglemonthlyIncome() {
   console.log('toggle');
 
-  document.getElementById('annualIncomePopup').classList.toggle('popup-off');
+  document.getElementById('monthlyIncomePopup').classList.toggle('popup-off');
 }
 
 function debtToIncomePopup() {
@@ -132,9 +132,9 @@ function handlePaymentOption(){
     debtToIncomeInput.value = 40
     dtiBar.value = 40 
     debtTOIncomeRatio.textContent = 40
-    monthlyPaymentResult.textContent = parseInt((annualIncomeInput.value*debtToIncomeInput.value) / 100 - monthlyDebtsInput.value)
+    monthlyPaymentResult.textContent = parseInt((monthlyIncomeInput.value*debtToIncomeInput.value) / 100 - monthlyDebtsInput.value)
     console.log(monthlyPaymentResult.textContent)
-    console.log(annualIncomeInput.value)
+    console.log(monthlyIncomeInput.value)
     console.log(debtToIncomeInput.value)
     console.log(monthlyDebtsInput.value)
   }

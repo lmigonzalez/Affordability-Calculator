@@ -15,27 +15,27 @@
 		<form>
 			<div id="monthly-income" class="input-container money">
 				<div class="label-and-btn">
-					<label for="annualIncome">Average Monthly Income</label>
+					<label for="monthlyIncome">Average Monthly Income</label>
 					<!-- <div class="popup-container">
               <button
                 type="button"
-                onclick="toggleAnnualIncome()"
+                onclick="togglemonthlyIncome()"
                 class="question-btn"
               >
                 ?
               </button>
-              <div id="annualIncomePopup" class="popup">
+              <div id="monthlyIncomePopup" class="popup">
                 <div class="triangle"></div>
                 <div class="popup-head">
-                  <strong>Annual income</strong>
-                  <button type="button" onclick="toggleAnnualIncome()">
+                  <strong>monthly income</strong>
+                  <button type="button" onclick="togglemonthlyIncome()">
                     <img src="/images/x-mark.png" alt="x mark" />
                   </button>
                 </div>
                 <div class="popup-body">
                   <p>
-                    Your total annual earnings before taxes, for you and your
-                    co-borrower. Annual income includes your base salary and any
+                    Your total monthly earnings before taxes, for you and your
+                    co-borrower. monthly income includes your base salary and any
                     additional commissions, bonuses, tips, and investment
                     income.
                   </p>
@@ -45,18 +45,18 @@
 				</div>
 				<div class="input-and-span-start">
 					<span>$</span>
-					<input id="annualIncome" type="text" name="annualIncome" value="5000" class="money-input"
+					<input id="monthlyIncome" type="text" name="monthlyIncome" value="5000" class="money-input"
 						onchange="calculateAffordability()" />
 				</div>
 			</div>
 
 			<div id="maximum-payment" class="input-container money disabled-input">
 				<div class="label-and-btn">
-					<label for="annualIncome">Maximum payment</label>
+					<label for="monthlyIncome">Maximum payment</label>
 				</div>
 				<div class="input-and-span-start">
 					<span>$</span>
-					<input id="max-payment" type="text" name="annualIncome" value="1850" class="money-input"
+					<input id="max-payment" type="text" name="monthlyIncome" value="1850" class="money-input"
 						onchange="syncMaxPaymentWithDtiBar()" />
 				</div>
 			</div>

@@ -2,6 +2,8 @@
 
 let isActive = false
 
+let advancedForm = false
+
 //simple
 const monthlyIncomeInput = document.getElementById('monthlyIncome');
 const maximumPaymentInput = document.getElementById('max-payment');
@@ -102,6 +104,14 @@ const toggleForm = () => {
   console.log('hello');
   document.getElementById('advancedForm').classList.toggle('showAdvanceForm');
   document.getElementById('advanced-arrow').classList.toggle('rotate-arrow')
+  advancedForm = !advancedForm
+  console.log(advancedForm)
+  if(advancedForm){
+    document.getElementById('btn-content').textContent = 'Simple'
+  }else{
+    document.getElementById('btn-content').textContent = 'Advanced'
+  }
+
 };
 
 function togglemonthlyIncome() {

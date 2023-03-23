@@ -43,8 +43,8 @@ const calculateAffordability = () => {
   let maximumPayment = parseFloat(maximumPaymentInput.value);
 
 
-  let monthlyMortgagePayment = !isActive? (monthlyIncome)*(debtToIncome/100) - monthlyDebts: maximumPayment
-  
+  let monthlyMortgagePayment = !isActive? monthlyIncome*(debtToIncome/100) - monthlyDebts : maximumPayment
+  console.log(monthlyMortgagePayment)
   
   result.textContent = parseInt(calculateResult(
     monthlyMortgagePayment,
@@ -60,7 +60,9 @@ function syncPercentWithBar() {
   dtiBar.value = parseInt(debtToIncomeInput.value);   
   debtTOIncomeRatio.textContent = debtToIncomeInput.value
 
-  monthlyPaymentResult.textContent = dtiBar.value
+  let payment = parseInt((monthlyIncomeInput.value*debtToIncomeInput.value) / 100 - monthlyDebtsInput.value)
+
+  monthlyPaymentResult.textContent = (isActive? dtiBar.value:(payment > 0 ? payment : 0))
   
   calculateAffordability()
   
@@ -134,10 +136,7 @@ function handlePaymentOption(){
     dtiBar.value = 40 
     debtTOIncomeRatio.textContent = 40
     monthlyPaymentResult.textContent = parseInt((monthlyIncomeInput.value*debtToIncomeInput.value) / 100 - monthlyDebtsInput.value)
-    console.log(monthlyPaymentResult.textContent)
-    console.log(monthlyIncomeInput.value)
-    console.log(debtToIncomeInput.value)
-    console.log(monthlyDebtsInput.value)
+   
   }
 
   if(isActive){
@@ -157,7 +156,7 @@ function calculateResult(
   loanTerm
 ) { 
 
-  const interestRateDecimalMonthly = interestRate / 100;
+  const interestRateDecimalMonthly = interestRate / 1200;
  
   const propertyPrice =
     (monthlyMortgagePayment / (amortizedonstant(interestRateDecimalMonthly, loanTerm)))	

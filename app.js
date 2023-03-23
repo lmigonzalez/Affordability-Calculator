@@ -52,8 +52,8 @@ const calculateAffordability = () => {
     downPayment,    
     interestRate,
     loanTerm
-  )) 
-
+  )).toString()
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
    
 };
 
@@ -61,23 +61,35 @@ function syncPercentWithBar() {
   dtiBar.value = parseInt(debtToIncomeInput.value);  
   
   let payment = parseInt((annualIncomeInput.value / 12) * debtToIncomeInput.value / 100 - monthlyDebtsInput.value)
+      .toString()
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 
-  monthlyPaymentResult.textContent = payment>0?payment:0   
+  monthlyPaymentResult.textContent = dtiBar.value
   
-  calculateAffordability();
+  calculateAffordability()
+  
 }
 
 function syncBarWithPercent() {  
-  debtToIncomeInput.value = parseInt(dtiBar.value)
-  
+  debtToIncomeInput.value = parseInt(dtiBar.value)  
 
   let payment = parseInt((annualIncomeInput.value / 12) * debtToIncomeInput.value / 100 - monthlyDebtsInput.value)
 
-  monthlyPaymentResult.textContent = payment > 0 ? payment : 0   
+  monthlyPaymentResult.textContent = (isActive? dtiBar.value:(payment > 0 ? payment : 0))
   
-  maximumPaymentInput.value = payment;
-   
-  calculateAffordability();
+  if (isActive) {
+    maximumPaymentInput.value = dtiBar.value 
+  }
+
+  calculateAffordability()
+}
+
+function syncMaxPaymentWithDtiBar() {
+  dtiBar.max = (maximumPaymentInput.value * 2) 
+  dtiBar.value = maximumPaymentInput.value 
+  monthlyPaymentResult.textContent = parseInt(dtiBar.value)
+
+  calculateAffordability()
 }
 
 const toggleForm = () => {
@@ -111,8 +123,22 @@ function handlePaymentOption(){
 	maximumInput.classList.toggle('disabled-input')
 	monthlyInput.classList.toggle('disabled-input')
 	monthlyDebts.classList.toggle('disabled-input')
-	dti.classList.toggle('disabled-input')
-	isActive = !isActive
+  dti.classList.toggle('disabled-input')
+
+  isActive = !isActive
+  if (isActive) {
+    maximumPaymentInput.value = 1850      
+    syncMaxPaymentWithDtiBar()
+  }
+  else {
+    dtiBar.max = 43
+    debtToIncomeInput.value = 40
+    dtiBar.value = parseInt(debtToIncomeInput.value)
+    monthlyPaymentResult.textContent = parseInt((annualIncomeInput.value / 12) * debtToIncomeInput.value / 100 - monthlyDebtsInput.value)
+    
+  }
+    
+    
 }
 
 function calculateResult( 

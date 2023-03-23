@@ -58,6 +58,7 @@ const calculateAffordability = () => {
 
 function syncPercentWithBar() {  
   dtiBar.value = parseInt(debtToIncomeInput.value);   
+  debtTOIncomeRatio.textContent = debtToIncomeInput.value
 
   monthlyPaymentResult.textContent = dtiBar.value
   
@@ -195,4 +196,3 @@ function bigIntToNumber(numToConvert, decimals) {
   num.splice(-decimals, 0, '.');
   return Number(num.reduce((acc, curr) => (acc += curr)));
 }
-

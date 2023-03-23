@@ -26,9 +26,14 @@ section {
   justify-content: space-between;
   align-items: start;
 }
+
+
 span {
   color: #474e68;
 }
+
+
+
 .form-type {
   border-style: none;
   background-color: transparent;
@@ -49,13 +54,14 @@ span {
 }
 
 input {
-  height: 2.5rem;
+	padding: 0 1rem;
+	height: 100%;
+	font-weight: 300;
+	font-size: 1.2rem;
+  /* height: 2.5rem;
   width: 15rem;
   border-width: 1px;
-  font-size: 1.2rem;
-  padding: 0 1rem;
-  font-weight: 300;
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.8rem; */
 }
 
 #dtiBar{
@@ -82,7 +88,7 @@ input {
 }
 
 .input-container.money input {
-  padding: 0 2.5rem;
+  /* padding: 0 2.5rem; */
 }
 
 .input-container {
@@ -90,12 +96,105 @@ input {
   width: min-content;
 }
 
+.input-and-span-start{
+	/* background-color: red;  */
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 2.5rem;
+	width: 15rem;
+	border-width: 1px;
+	font-size: 1.2rem;
+	font-weight: 300;
+	margin-bottom: 0.8rem;
+	border: 1px solid black;
+}
+
+.input-and-span-start input{
+	width:12.5rem;
+	background-color: transparent;
+	border-style: none;
+}
+
+.input-and-span-start span{
+	background-color: #D8D8D8;
+	height: 100%;
+	width: 2.5rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-right: 1px solid black;
+}
+
+.input-and-span-end{
+	/* background-color: red;  */
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 2.5rem;
+	width: 15rem;
+	border-width: 1px;
+	font-size: 1.2rem;
+	font-weight: 300;
+	margin-bottom: 0.8rem;
+	border: 1px solid black;
+}
+
+.input-and-span-end input{
+	width:12.5rem;
+	background-color: transparent;
+	border-style: none;
+}
+
+.input-and-span-end span{
+	background-color: #D8D8D8;
+	height: 100%;
+	width: 2.5rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-left: 1px solid black;
+}
+
+
+.input-and-span-month{
+	/* background-color: red;  */
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 2.5rem;
+	width: 15rem;
+	border-width: 1px;
+	font-size: 1.2rem;
+	font-weight: 300;
+	margin-bottom: 0.8rem;
+	border: 1px solid black;
+}
+
+
+.input-and-span-month input{
+	width: 100%;
+	background-color: transparent;
+	border-style: none;
+}
+
+.input-and-span-month span{
+	background-color: #D8D8D8;
+	height: 100%;
+	width: 8rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-left: 1px solid black;
+}
+
+
 .input-container.money span {
-  position: absolute;
+  /* position: absolute;
   top: 56%;
   left: 1rem;
   transform: translate(-50%, -50%);
-  font-size: 1.2rem;
+  font-size: 1.2rem; */
   /* background-color: gainsboro;
   height: 2.4rem;
   width: 2rem;
@@ -108,11 +207,11 @@ input {
 }
 
 .input-container.percent span {
-  position: absolute;
+  /* position: absolute;
   top: 55%;
   right: 0;
   transform: translate(-1rem, -50%);
-  font-size: 1.2rem;
+  font-size: 1.2rem; */
   /* background-color: gainsboro;
   height: 2.4rem;
   width: auto;

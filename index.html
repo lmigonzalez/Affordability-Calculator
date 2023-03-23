@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css" />
-    <title>Document</title>
-  </head>
-  <body>
-    <h1>Affordability Calculator</h1>
-    <section>
-      <form>
-        <div id="monthly-income" class="input-container money">
-          <div class="label-and-btn">
-            <label for="annualIncome">Average Monthly Income</label>
-            <!-- <div class="popup-container">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="styles.css" />
+	<title>Document</title>
+</head>
+
+<body>
+	<h1>Affordability Calculator</h1>
+	<section>
+		<form>
+			<div id="monthly-income" class="input-container money">
+				<div class="label-and-btn">
+					<label for="annualIncome">Average Monthly Income</label>
+					<!-- <div class="popup-container">
               <button
                 type="button"
                 onclick="toggleAnnualIncome()"
@@ -40,196 +42,163 @@
                 </div>
               </div>
             </div> -->
-          </div>
-          <span>$</span>
-          <input
-            id="annualIncome"
-            type="text"
-            name="annualIncome"
-            value="70000"
-            class="money-input"
-            onchange="calculateAffordability()"
-          />
-        </div>
+				</div>
+				<div class="input-and-span-start">
+					<span>$</span>
+					<input id="annualIncome" type="text" name="annualIncome" value="70000" class="money-input"
+						onchange="calculateAffordability()" />
+				</div>
+			</div>
 
-        <div id="maximum-payment" class="input-container money disabled-input">
-          <div class="label-and-btn">
-            <label for="annualIncome">Maximum payment</label>
-          </div>
-          <span>$</span>
-          <input
-            id="max-payment"
-            type="text"
-            name="annualIncome"
-            value="1850"
-            class="money-input"
-            onchange="calculateAffordability()"
-          />
-        </div>
+			<div id="maximum-payment" class="input-container money disabled-input">
+				<div class="label-and-btn">
+					<label for="annualIncome">Maximum payment</label>
+				</div>
+				<div class="input-and-span-start">
+					<span>$</span>
+					<input id="max-payment" type="text" name="annualIncome" value="1850" class="money-input"
+						onchange="calculateAffordability()" />
+				</div>
+			</div>
 
-        <div class="calculate-by-payment">
-          <p>Calculate by</p>
-          <button onclick="handlePaymentOption()" type="button">payment</button>
-        </div>
+			<div class="calculate-by-payment">
+				<p>Calculate by</p>
+				<button onclick="handlePaymentOption()" type="button">payment</button>
+			</div>
 
-        <div id="monthly-debts" class="input-container money">
-          <label for="monthlyDebts">Monthly debts</label>
-          <span>$</span>
-          <input
-            id="monthlyDebts"
-            type="text"
-            value="250"
-            onchange="calculateAffordability()"
-          />
-        </div>
+			<div id="monthly-debts" class="input-container money">
+				<label for="monthlyDebts">Monthly debts</label>
 
-        <div class="input-container money">
-          <label for="downPayment">Down payment</label>
-          <span>$</span>
-          <input
-            id="downPayment"
-            type="text"
-            value="20000"
-            onchange="calculateAffordability()"
-          />
-        </div>
+				<div class="input-and-span-start">
+					<span>$</span>
+					<input id="monthlyDebts" type="text" value="250" onchange="calculateAffordability()" />
+				</div>
+			</div>
 
-        <button
-          type="button"
-          id="form-type"
-          class="form-type"
-          onclick="return toggleForm()"
-        >
-          Advanced
-          <img src="/images/down-arrow.svg" alt="" />
-        </button>
+			<div class="input-container money">
+				<label for="downPayment">Down payment</label>
 
-        <div id="advancedForm" class="advancedFormContainer">
-          <div id="dti" class="input-container percent">
-            <div class="label-and-btn">
-              <label for="debtToIncome">Debt-to-income</label>
+				<div class="input-and-span-start"> <span>$</span>
+					<input id="downPayment" type="text" value="20000" onchange="calculateAffordability()" />
+				</div>
 
-              <div class="popup-container">
-                <button
-                  type="button"
-                  onclick="debtToIncomePopup()"
-                  class="question-btn"
-                >
-                  ?
-                </button>
-                <div id="debtToIncomePopup" class="popup">
-                  <div class="triangle"></div>
-                  <div class="popup-head">
-                    <strong>Debt-to-income (DTI) ratio</strong>
-                    <button type="button" onclick="debtToIncomePopup()">
-                      <img src="/images/x-mark.png" alt="x mark" />
-                    </button>
-                  </div>
-                  <div class="popup-body">
-                    <p>
-                      Enter the percentage of your income you are comfortable
-                      spending towards your mortgage. This number will also take
-                      monthly debts into account. <br />
-                      <br />
-                      Typically your DTI should be 40%-45% or lower to qualify
-                      for a mortgage. Certain loans allow for higher DTIs, such
-                      as FHA loans (43%) and VA or USDA loans (41%).
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+			</div>
 
-            <span>%</span>
-            <input
-              id="debtToIncome"
-              type="text"
-              value="40"
-              onchange="syncPercentWithBar()"
-            />
-          </div>
+			<button type="button" id="form-type" class="form-type" onclick="return toggleForm()">
+				Advanced
+				<img src="/images/down-arrow.svg" alt="" />
+			</button>
 
-          <div class="input-container percent">
-            <div class="label-and-btn">
-              <label for="interestRate">Interest rate</label>
+			<div id="advancedForm" class="advancedFormContainer">
+				<div id="dti" class="input-container percent">
+					<div class="label-and-btn">
+						<label for="debtToIncome">Debt-to-income</label>
 
-              <div class="popup-container">
-                <button
-                  type="button"
-                  onclick="interestRatePopup()"
-                  class="question-btn"
-                >
-                  ?
-                </button>
-                <div id="interestRatePopup" class="popup">
-                  <div class="triangle"></div>
-                  <div class="popup-head">
-                    <strong>Interest rate</strong>
-                    <button type="button" onclick="interestRatePopup()">
-                      <img src="/images/x-mark.png" alt="x mark" />
-                    </button>
-                  </div>
-                  <div class="popup-body">
-                    <p>
-                      Your interest rate is usually determined by your lender
-                      and different variables may impact this rate.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+						<div class="popup-container">
+							<button type="button" onclick="debtToIncomePopup()" class="question-btn">
+								?
+							</button>
+							<div id="debtToIncomePopup" class="popup">
+								<div class="triangle"></div>
+								<div class="popup-head">
+									<strong>Debt-to-income (DTI) ratio</strong>
+									<button type="button" onclick="debtToIncomePopup()">
+										<img src="/images/x-mark.png" alt="x mark" />
+									</button>
+								</div>
+								<div class="popup-body">
+									<p>
+										Enter the percentage of your income you are comfortable
+										spending towards your mortgage. This number will also take
+										monthly debts into account. <br />
+										<br />
+										Typically your DTI should be 40%-45% or lower to qualify
+										for a mortgage. Certain loans allow for higher DTIs, such
+										as FHA loans (43%) and VA or USDA loans (41%).
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="input-and-span-end">
+						<input id="debtToIncome" type="text" value="40" onchange="syncPercentWithBar()" />
+						<span>%</span>
+					</div>
 
-            <span>%</span>
-            <input
-              id="interestRate"
-              type="text"
-              value="4.176"
-              onchange="calculateAffordability()"
-            />
-          </div>
+				</div>
 
-          <div class="input-container percent">
-            <div class="label-and-btn">
-              <label for="loanTerm">Loan term</label>
-              <div class="popup-container">
-                <button
-                  type="button"
-                  onclick="loanTermPopup()"
-                  class="question-btn"
-                >
-                  ?
-                </button>
-                <div id="loanTermPopup" class="popup">
-                  <div class="triangle"></div>
-                  <div class="popup-head">
-                    <strong>Interest rate</strong>
-                    <button type="button" onclick="loanTermPopup()">
-                      <img src="/images/x-mark.png" alt="x mark" />
-                    </button>
-                  </div>
-                  <div class="popup-body">
-                    <p>
-                      Representative interest rates are based upon a national,
-                      or state specific average from lenders quoting on Zillow
-                      for preliminary research purposes only. Actual available
-                      rates and monthly payment amounts are subject to market
-                      fluctuations and will depend on a number of factors,
-                      including geography and loan characteristics.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+				<div class="input-container percent">
+					<div class="label-and-btn">
+						<label for="interestRate">Interest rate</label>
 
-            <span>/months</span>
-            <input
-              id="loanTerm"
-              type="text"
-              value="360"
-              onchange="calculateAffordability()"
-            />
-          </div>
-          <!-- <div class="checkbox-container">
+						<div class="popup-container">
+							<button type="button" onclick="interestRatePopup()" class="question-btn">
+								?
+							</button>
+							<div id="interestRatePopup" class="popup">
+								<div class="triangle"></div>
+								<div class="popup-head">
+									<strong>Interest rate</strong>
+									<button type="button" onclick="interestRatePopup()">
+										<img src="/images/x-mark.png" alt="x mark" />
+									</button>
+								</div>
+								<div class="popup-body">
+									<p>
+										Your interest rate is usually determined by your lender
+										and different variables may impact this rate.
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="input-and-span-end">
+
+						<input id="interestRate" type="text" value="4.176" onchange="calculateAffordability()" />
+						<span>%</span>
+					</div>
+
+				</div>
+
+				<div class="input-container percent">
+					<div class="label-and-btn">
+						<label for="loanTerm">Loan term</label>
+						<div class="popup-container">
+							<button type="button" onclick="loanTermPopup()" class="question-btn">
+								?
+							</button>
+							<div id="loanTermPopup" class="popup">
+								<div class="triangle"></div>
+								<div class="popup-head">
+									<strong>Interest rate</strong>
+									<button type="button" onclick="loanTermPopup()">
+										<img src="/images/x-mark.png" alt="x mark" />
+									</button>
+								</div>
+								<div class="popup-body">
+									<p>
+										Representative interest rates are based upon a national,
+										or state specific average from lenders quoting on Zillow
+										for preliminary research purposes only. Actual available
+										rates and monthly payment amounts are subject to market
+										fluctuations and will depend on a number of factors,
+										including geography and loan characteristics.
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="input-and-span-month">
+						
+						<input id="loanTerm" type="text" value="360" onchange="calculateAffordability()" />
+						<span>/months</span>
+						
+
+					</div>
+				</div>
+				<!-- <div class="checkbox-container">
             <input
               id="taxesInclude"
               type="checkbox"
@@ -241,7 +210,7 @@
             <label for="vehicle1">Include taxes/ins</label><br />
           </div> -->
 
-          <!-- <div class="input-container percent">
+				<!-- <div class="input-container percent">
             <label for="propertyTax">Property tax</label>
             <span>%</span>
             <input
@@ -252,7 +221,7 @@
             />
           </div> -->
 
-          <!-- <div class="input-container percent">
+				<!-- <div class="input-container percent">
             <label for="homeInsurance">Home insurance</label>
             <span>/year</span>
             <input
@@ -263,7 +232,7 @@
             />
           </div> -->
 
-          <!-- <div class="checkbox-container">
+				<!-- <div class="checkbox-container">
             <input
               id="OMIinclude"
               type="checkbox"
@@ -274,7 +243,7 @@
             <label for="OMIinclude">Include PMI</label><br />
           </div> -->
 
-          <!-- <div class="bothXContent">
+				<!-- <div class="bothXContent">
             <label for="hOADues">HOA dues</label>
             <span class="leftSpan">$</span>
             <span class="rightSpan"> /month</span>
@@ -285,42 +254,35 @@
               onchange="calculateAffordability()"
             />
           </div> -->
-        </div>
-      </form>
-      <div class="result-container">
-        <p>You can afford a house up to</p>
-        <strong id="result">240,700</strong>
+			</div>
+		</form>
+		<div class="result-container">
+			<p>You can afford a house up to</p>
+			<strong id="result">240,700</strong>
 
-        <input
-          type="range"
-          id="dtiBar"
-          name="dtibar"
-          min="0"
-          max="43"
-          value="40"
-          onchange="syncBarWithPercent()"
-        />
+			<input type="range" id="dtiBar" name="dtibar" min="0" max="43" value="40" onchange="syncBarWithPercent()" />
 
-        <div class="monthly-payment-information">
-          <div>
-            <img src="/images/wallet.png" />
-            <div>
-              <p>Monthly Payment</p>
-              <strong id="monthlyPaymentResult">1,837</strong>
-            </div>
-          </div>
-          <div class="debt-to-ratio-information">
-            <img src="/images/bar-chart.png" />
-            <div>
-              <p>Debt To Income Ratio</p>
-              <strong id="debtTOIncomeRatio">36</strong>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <script src="app.js"></script>
-    <!-- <script type="module"  src="test.js"></script> -->
-    <!-- <script type="module" src="helper.js"></script> -->
-  </body>
+			<div class="monthly-payment-information">
+				<div>
+					<img src="/images/wallet.png" />
+					<div>
+						<p>Monthly Payment</p>
+						<strong id="monthlyPaymentResult">1,837</strong>
+					</div>
+				</div>
+				<div class="debt-to-ratio-information">
+					<img src="/images/bar-chart.png" />
+					<div>
+						<p>Debt To Income Ratio</p>
+						<strong id="debtTOIncomeRatio">36</strong>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<script src="app.js"></script>
+	<!-- <script type="module"  src="test.js"></script> -->
+	<!-- <script type="module" src="helper.js"></script> -->
+</body>
+
 </html>

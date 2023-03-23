@@ -12,7 +12,6 @@ const downPaymentInput = document.getElementById('downPayment');
 const debtToIncomeInput = document.getElementById('debtToIncome');
 const interestRateInput = document.getElementById('interestRate');
 const loanTermInput = document.getElementById('loanTerm');
-
 // const taxesIncludeInput = document.getElementById('taxesInclude');
 // const propertyTaxInput = document.getElementById('propertyTax');
 // const OMIIncludeInput = document.getElementById('OMIinclude');
@@ -66,10 +65,9 @@ function syncPercentWithBar() {
   
 }
 
-
-
 function syncBarWithPercent() {  
-  debtToIncomeInput.value = parseInt(dtiBar.value)  
+  debtToIncomeInput.value = parseInt(dtiBar.value) 
+  debtTOIncomeRatio.textContent = !isActive? parseInt(dtiBar.value):0
 
   let payment = parseInt((annualIncomeInput.value / 12) * debtToIncomeInput.value / 100 - monthlyDebtsInput.value)
 
@@ -132,7 +130,8 @@ function handlePaymentOption(){
   else {
     dtiBar.max = 43
     debtToIncomeInput.value = 40
-    dtiBar.value = parseInt(debtToIncomeInput.value)
+    dtiBar.value = parseInt(debtToIncomeInput.value) 
+    debtTOIncomeRatio.textContent = 40
     monthlyPaymentResult.textContent = parseInt((annualIncomeInput.value / 12) * debtToIncomeInput.value / 100 - monthlyDebtsInput.value)
     
   }

@@ -55,6 +55,11 @@ label{
   height: 1rem;
   color: #3e54ac;
   margin-left: 0.3rem;
+  transition: transform 0.2s ease-in-out;
+}
+
+.rotate-arrow{
+	transform: rotate(180deg);
 }
 
 input {

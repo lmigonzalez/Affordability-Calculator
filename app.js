@@ -92,6 +92,7 @@ function syncMaxPaymentWithDtiBar() {
 const toggleForm = () => {
   console.log('hello');
   document.getElementById('advancedForm').classList.toggle('showAdvanceForm');
+  document.getElementById('advanced-arrow').classList.toggle('rotate-arrow')
 };
 
 function togglemonthlyIncome() {

@@ -69,10 +69,13 @@ function syncPercentWithBar() {
 
 function syncBarWithPercent() {  
   debtToIncomeInput.value = parseInt(dtiBar.value)
+  
 
   let payment = parseInt((annualIncomeInput.value / 12) * debtToIncomeInput.value / 100 - monthlyDebtsInput.value)
 
-  monthlyPaymentResult.textContent = payment>0?payment:0   
+  monthlyPaymentResult.textContent = payment > 0 ? payment : 0   
+  
+  maximumPaymentInput.value = payment;
    
   calculateAffordability();
 }

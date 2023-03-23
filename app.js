@@ -32,60 +32,69 @@ const result = document.getElementById('result');
 const monthlyPaymentResult = document.getElementById('monthlyPaymentResult');
 const debtTOIncomeRatio = document.getElementById('debtTOIncomeRatio');
 
-const calculateAffordability = () => {
+const calculateAffordability = () => {  
 
-  let monthlyIncome = parseFloat(monthlyIncomeInput.value);  
-  let monthlyDebts = parseFloat(monthlyDebtsInput.value);
-  let downPayment = parseFloat(downPaymentInput.value);
-  let debtToIncome = parseFloat(debtToIncomeInput.value);
+  monthlyIncomeInput.value = numberPreetier(numberPreetier(monthlyIncomeInput.value));  
+  monthlyDebtsInput.value= numberPreetier(numberPreetier(monthlyDebtsInput.value));
+  downPaymentInput.value = numberPreetier(numberPreetier(downPaymentInput.value));
+  debtToIncomeInput.value = numberPreetier(numberPreetier(debtToIncomeInput.value));   
+  loanTermInput.value = numberPreetier(numberPreetier(loanTermInput.value)); 
+  maximumPaymentInput.value= numberPreetier(numberPreetier(maximumPaymentInput.value));
+
+
+  let monthlyIncome = numberPreetier(monthlyIncomeInput.value);  
+  let monthlyDebts = numberPreetier(monthlyDebtsInput.value);
+  let downPayment = numberPreetier(downPaymentInput.value);
+  let debtToIncome = numberPreetier(debtToIncomeInput.value);
   let interestRate = parseFloat(interestRateInput.value);
-  let loanTerm = parseFloat(loanTermInput.value); 
-  let maximumPayment = parseFloat(maximumPaymentInput.value);
+  let loanTerm = numberPreetier(loanTermInput.value); 
+  let maximumPayment = numberPreetier(maximumPaymentInput.value);
 
 
-  let monthlyMortgagePayment = !isActive? (monthlyIncome)*(debtToIncome/100) - monthlyDebts: maximumPayment
+  let monthlyMortgagePayment = !isActive? monthlyIncome*(debtToIncome/100) - monthlyDebts : maximumPayment
+  console.log(monthlyMortgagePayment)
   
-  
-  result.textContent = parseInt(calculateResult(
+  result.textContent = numberPreetier(calculateResult(
     monthlyMortgagePayment,
     downPayment,    
     interestRate,
     loanTerm
-  )).toString()
-      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+  ))
    
 };
 
 function syncPercentWithBar() {  
-  dtiBar.value = parseInt(debtToIncomeInput.value);   
-  debtTOIncomeRatio.textContent = debtToIncomeInput.value
+  dtiBar.value = numberPreetier(debtToIncomeInput.value);   
+  debtTOIncomeRatio.textContent = numberPreetier(debtToIncomeInput.value)
 
-  monthlyPaymentResult.textContent = dtiBar.value
+  let payment = (numberPreetier(monthlyIncomeInput.value)*numberPreetier(debtToIncomeInput.value)) / 100 - numberPreetier(monthlyDebtsInput.value)
+
+  monthlyPaymentResult.textContent = numberPreetier(isActive? numberPreetier(dtiBar.value):(payment > 0 ? payment : 0))
   
   calculateAffordability()
   
 }
 
 function syncBarWithPercent() {  
-  debtToIncomeInput.value = parseInt(dtiBar.value) 
-  debtTOIncomeRatio.textContent = !isActive? parseInt(dtiBar.value):0
+  
+  debtToIncomeInput.value = numberPreetier(dtiBar.value) 
+  debtTOIncomeRatio.textContent = numberPreetier(!isActive? parseInt(dtiBar.value):0)
 
-  let payment = parseInt((monthlyIncomeInput.value*debtToIncomeInput.value) / 100 - monthlyDebtsInput.value)
+  let payment = (numberPreetier(monthlyIncomeInput.value)*numberPreetier(debtToIncomeInput.value)) / 100 - numberPreetier(monthlyDebtsInput.value)
 
-  monthlyPaymentResult.textContent = (isActive? dtiBar.value:(payment > 0 ? payment : 0))
+  monthlyPaymentResult.textContent = numberPreetier(isActive? numberPreetier(dtiBar.value):(payment > 0 ? payment : 0))
   
   if (isActive) {
-    maximumPaymentInput.value = dtiBar.value 
+    maximumPaymentInput.value = numberPreetier(dtiBar.value) 
   }
 
   calculateAffordability()
 }
 
 function syncMaxPaymentWithDtiBar() {
-  dtiBar.max = (maximumPaymentInput.value * 2) 
-  dtiBar.value = maximumPaymentInput.value 
-  monthlyPaymentResult.textContent = parseInt(dtiBar.value)
-
+  dtiBar.max = numberPreetier(maximumPaymentInput.value) * 2 
+  dtiBar.value = maximumPaymentInput.value
+  monthlyPaymentResult.textContent = numberPreetier(numberPreetier(dtiBar.value))
   calculateAffordability()
 }
 
@@ -126,7 +135,7 @@ function handlePaymentOption(){
 
   isActive = !isActive
   if (isActive) {
-    maximumPaymentInput.value = 1850      
+    maximumPaymentInput.value = numberPreetier(1850)    
     syncMaxPaymentWithDtiBar()
   }
   else {
@@ -134,11 +143,7 @@ function handlePaymentOption(){
     debtToIncomeInput.value = 40
     dtiBar.value = 40 
     debtTOIncomeRatio.textContent = 40
-    monthlyPaymentResult.textContent = parseInt((monthlyIncomeInput.value*debtToIncomeInput.value) / 100 - monthlyDebtsInput.value)
-    console.log(monthlyPaymentResult.textContent)
-    console.log(monthlyIncomeInput.value)
-    console.log(debtToIncomeInput.value)
-    console.log(monthlyDebtsInput.value)
+    monthlyPaymentResult.textContent = numberPreetier((numberPreetier(monthlyIncomeInput.value) * numberPreetier(debtToIncomeInput.value)) / 100 - numberPreetier(monthlyDebtsInput.value))    
   }
 
   if(isActive){
@@ -158,7 +163,7 @@ function calculateResult(
   loanTerm
 ) { 
 
-  const interestRateDecimalMonthly = interestRate / 100;
+  const interestRateDecimalMonthly = interestRate / 1200;
  
   const propertyPrice =
     (monthlyMortgagePayment / (amortizedonstant(interestRateDecimalMonthly, loanTerm)))	
@@ -197,3 +202,8 @@ function bigIntToNumber(numToConvert, decimals) {
   num.splice(-decimals, 0, '.');
   return Number(num.reduce((acc, curr) => (acc += curr)));
 }
+
+function numberPreetier(num) {
+  return typeof num === (typeof ' ') ? parseInt(num.match(/[0-9.]+/g).join('')) : parseInt(num).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+}
+

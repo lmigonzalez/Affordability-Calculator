@@ -32,6 +32,10 @@ span {
   color: #474e68;
 }
 
+label{
+	font-weight: 600;
+	font-size: 0.8rem;
+}
 
 
 .form-type {
@@ -97,7 +101,6 @@ input {
 }
 
 .input-and-span-start{
-	/* background-color: red;  */
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -111,7 +114,7 @@ input {
 }
 
 .input-and-span-start input{
-	width:12.5rem;
+	width:100%;
 	background-color: transparent;
 	border-style: none;
 }
@@ -141,7 +144,7 @@ input {
 }
 
 .input-and-span-end input{
-	width:12.5rem;
+	width:100%;
 	background-color: transparent;
 	border-style: none;
 }
@@ -459,7 +462,15 @@ label::after {
 	width: 100%;
 }
 
-  input{
+.input-and-span-start{
+	width: 100%;
+  }
+
+  .input-and-span-end{
+	width: 100%;
+  }
+
+   .input-and-span-month{
 	width: 100%;
   }
 

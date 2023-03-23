@@ -117,6 +117,7 @@ function handlePaymentOption(){
 	let monthlyInput = document.getElementById('monthly-income')
 	let maximumInput = document.getElementById('maximum-payment')
 	let monthlyDebts = document.getElementById('monthly-debts')
+	let paymentBtn = document.getElementById('handlePaymentBtn')
 	let dti = document.getElementById('dti')
 	maximumInput.classList.toggle('disabled-input')
 	monthlyInput.classList.toggle('disabled-input')
@@ -134,6 +135,13 @@ function handlePaymentOption(){
     dtiBar.value = parseInt(debtToIncomeInput.value)
     monthlyPaymentResult.textContent = parseInt((annualIncomeInput.value / 12) * debtToIncomeInput.value / 100 - monthlyDebtsInput.value)
     
+  }
+
+  if(isActive){
+	paymentBtn.textContent = 'income'
+}else{
+	  paymentBtn.textContent = 'payment'
+
   }
     
     
